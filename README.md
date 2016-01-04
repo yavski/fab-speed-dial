@@ -93,9 +93,10 @@ The following attribtues are supported:
 | FabSpeedDial| Android | Desscription  |
 | ------------- |-------------|-----|
 | app:fabDrawable | [android:src](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:src) | Sets the icon drawable of the main FAB |
-| app:fabBackgroundTintColor | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the main FAB |
-| app:miniFabBackgroundTintColor | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the mini FAB(s) |
-| app:miniFabImageTintColor | [android:tint](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:tint) | Tints the icon drawable of the mini FAB(s) |
+| app:fabDrawableTint | [android:tint](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:tint) | Tints the icon drawable of the main FAB |
+| app:fabBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the main FAB |
+| app:miniFabDrawableTint | [android:tint](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:tint) | Tints the icon drawable of the mini FAB(s) |
+| app:miniFabBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the mini FAB(s) |
 
 ### Caveats
 
