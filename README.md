@@ -83,7 +83,7 @@ Similarly, in order to be notified about a selection:
 ```
 
 
-### Customosisation
+### Customisation
 
 ##### Position
 In order to change the position of the view, use the standard android APIs to position *FabSpeedDial* within your *ViewGroup* and be sure to assign *fabGravity* a relevant value.
