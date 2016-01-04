@@ -110,10 +110,10 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private int menuId;
     private int fabGravity;
     private Drawable fabDrawable;
-    private ColorStateList fabBackgroundTintColor;
-
-    private ColorStateList miniFabBackgroundTintColor;
-    private ColorStateList miniFabImageTintColor;
+    private ColorStateList fabDrawableTint;
+    private ColorStateList fabBackgroundTint;
+    private ColorStateList miniFabDrawableTint;
+    private ColorStateList miniFabBackgroundTint;
     private int miniFabTitleTextColor;
 
     private boolean isAnimating;
@@ -180,18 +180,23 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             fabDrawable = ContextCompat.getDrawable(getContext(), R.drawable.fab_add_clear_selector);
         }
 
-        if (typedArray.hasValue(R.styleable.FabSpeedDial_fabBackgroundTintColor)) {
-            fabBackgroundTintColor = typedArray.getColorStateList(R.styleable.FabSpeedDial_fabBackgroundTintColor);
+        fabDrawableTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_fabDrawableTint);
+        if (fabDrawableTint == null) {
+            fabDrawableTint = getColorStateList(R.color.fab_drawable_tint);
         }
 
-        miniFabBackgroundTintColor = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabBackgroundTintColor);
-        if (miniFabBackgroundTintColor == null) {
-            miniFabBackgroundTintColor = getColorStateList(R.color.fab_background_tint_color);
+        if (typedArray.hasValue(R.styleable.FabSpeedDial_fabBackgroundTint)) {
+            fabBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_fabBackgroundTint);
         }
 
-        miniFabImageTintColor = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabImageTintColor);
-        if (miniFabImageTintColor == null) {
-            miniFabImageTintColor = getColorStateList(R.color.fab_image_tint_color);
+        miniFabBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabBackgroundTint);
+        if (miniFabBackgroundTint == null) {
+            miniFabBackgroundTint = getColorStateList(R.color.fab_background_tint);
+        }
+
+        miniFabDrawableTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabDrawableTint);
+        if (miniFabDrawableTint == null) {
+            miniFabDrawableTint = getColorStateList(R.color.mini_fab_drawable_tint);
         }
 
         miniFabTitleTextColor = typedArray.getColor(R.styleable.FabSpeedDial_miniFabTitleTextColor,
@@ -203,8 +208,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         super.onAttachedToWindow();
 
         if (isCoordinatorLayoutDescendant()) {
-            LinearLayout.LayoutParams layoutParams =
-                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LayoutParams layoutParams =
+                    new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             int coordinatorLayoutOffset = getResources().getDimensionPixelSize(R.dimen.coordinator_layout_offset);
             if (fabGravity == BOTTOM_END || fabGravity == TOP_END) {
                 layoutParams.setMargins(0, 0, coordinatorLayoutOffset, 0);
@@ -217,8 +222,11 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         // Set up the client's FAB
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setImageDrawable(fabDrawable);
-        if (fabBackgroundTintColor != null) {
-            fab.setBackgroundTintList(fabBackgroundTintColor);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            fab.setImageTintList(fabDrawableTint);
+        }
+        if (fabBackgroundTint != null) {
+            fab.setBackgroundTintList(fabBackgroundTint);
         }
 
         fab.setOnClickListener(new OnClickListener() {
@@ -233,8 +241,6 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
                     requestFocus();
 
-                    v.setSelected(true);
-
                     boolean showMenu = true;
                     if (menuListener != null) {
                         newNavigationMenu();
@@ -243,6 +249,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
                     if (showMenu) {
                         addMenuItems();
+                        fab.setSelected(true);
+                    } else {
+                        fab.setSelected(false);
                     }
                 }
             }
@@ -286,7 +295,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             public void onMenuModeChange(MenuBuilder menu) {
             }
         });
-    };
+    }
+
+    ;
 
     private boolean isCoordinatorLayoutDescendant() {
         ViewGroup parent = (ViewGroup) getParent();
@@ -357,9 +368,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             fabMenuItem.removeView(cardView);
         }
 
-        miniFab.setBackgroundTintList(miniFabBackgroundTintColor);
+        miniFab.setBackgroundTintList(miniFabBackgroundTint);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            miniFab.setImageTintList(miniFabImageTintColor);
+            miniFab.setImageTintList(miniFabDrawableTint);
         }
 
         return fabMenuItem;
@@ -472,7 +483,6 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         int[] colors = new int[]{color, color, color, color};
         return new ColorStateList(states, colors);
     }
-
 
     @Override
     public boolean dispatchKeyEventPreIme(KeyEvent event) {

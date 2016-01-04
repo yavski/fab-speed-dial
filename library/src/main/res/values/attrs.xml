@@ -28,10 +28,11 @@
 
         <!-- Optional attributes -->
         <attr name="fabDrawable" format="color|reference" />
-        <attr name="fabBackgroundTintColor" format="color|reference" />
+        <attr name="fabDrawableTint" format="color|reference" />
+        <attr name="fabBackgroundTint" format="color|reference" />
 
-        <attr name="miniFabBackgroundTintColor" format="color|reference" />
-        <attr name="miniFabImageTintColor" format="color|reference" />
+        <attr name="miniFabBackgroundTint" format="color|reference" />
+        <attr name="miniFabDrawableTint" format="color|reference" />
         <attr name="miniFabTitleTextColor" format="color|reference" />
 
     </declare-styleable>

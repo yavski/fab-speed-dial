@@ -34,7 +34,7 @@ public class EventsSampleActivity extends BaseSampleActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FabSpeedDial fabSpeedDial = ((FabSpeedDial) findViewById(R.id.fab_speed_dial));
+        FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.fab_speed_dial);
         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
             @Override
             public boolean onMenuItemSelected(MenuItem menuItem) {
