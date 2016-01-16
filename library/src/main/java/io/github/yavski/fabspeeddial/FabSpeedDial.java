@@ -207,17 +207,15 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
 
-        if (isCoordinatorLayoutDescendant()) {
-            LayoutParams layoutParams =
-                    new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            int coordinatorLayoutOffset = getResources().getDimensionPixelSize(R.dimen.coordinator_layout_offset);
-            if (fabGravity == BOTTOM_END || fabGravity == TOP_END) {
-                layoutParams.setMargins(0, 0, coordinatorLayoutOffset, 0);
-            } else {
-                layoutParams.setMargins(coordinatorLayoutOffset, 0, 0, 0);
-            }
-            menuItemsLayout.setLayoutParams(layoutParams);
+        LayoutParams layoutParams =
+                new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        int coordinatorLayoutOffset = getResources().getDimensionPixelSize(R.dimen.coordinator_layout_offset);
+        if (fabGravity == BOTTOM_END || fabGravity == TOP_END) {
+            layoutParams.setMargins(0, 0, coordinatorLayoutOffset, 0);
+        } else {
+            layoutParams.setMargins(coordinatorLayoutOffset, 0, 0, 0);
         }
+        menuItemsLayout.setLayoutParams(layoutParams);
 
         // Set up the client's FAB
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -297,21 +295,6 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         });
     }
 
-    ;
-
-    private boolean isCoordinatorLayoutDescendant() {
-        ViewGroup parent = (ViewGroup) getParent();
-
-        while (parent != null) {
-            if (parent instanceof CoordinatorLayout) {
-                return true;
-            }
-            parent = (ViewGroup) parent.getParent();
-        }
-
-        return false;
-    }
-
     @Override
     public void onClick(View v) {
         fab.setSelected(false);
@@ -324,7 +307,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
                 menuListener.onMenuItemSelected(cardViewMenuItemMap.get(v));
             }
         } else {
-            Log.d(TAG, "You haven't provided a OnActionSelectedListener.");
+            Log.d(TAG, "You haven't provided a MenuListener.");
         }
     }
 
