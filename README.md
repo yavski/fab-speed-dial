@@ -5,6 +5,13 @@ Similarly tо [NavigationView] (http://developer.android.com/reference/android/s
 
 ### Gettting started
 
+##### Add the dependency to gradle.build
+```
+dependencies {
+    compile 'io.github.yavski:fab-speed-dial:1.0.0'
+}
+```
+
 ##### Define a menu resource
 ```
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
@@ -76,7 +83,7 @@ Similarly, in order to be notified about a selection:
 ```
 
 
-### Customosisation
+### Customisation
 
 ##### Position
 In order to change the position of the view, use the standard android APIs to position *FabSpeedDial* within your *ViewGroup* and be sure to assign *fabGravity* a relevant value.
@@ -101,7 +108,7 @@ The following attribtues are supported:
 ### Caveats
 
 If you have used FloatingActionButton, CoordinatorLayout, and both combined, you are most probably aware that:
-* Internally, FAB has two main implementations: one for SDK >= 21, one for earlier versions; **the one for older versions uses extra padding in order to draw shadows; you don't need to account for the extra padding** as the library takes care of it however do check your layouts/dimensions to avoid mis-positioned views. views. 
+* Internally, FAB has two main implementations: one for SDK >= 21, one for earlier versions; **the one for older versions uses extra padding in order to draw shadows; you don't need to account for the extra padding** as the library takes care of it however do check your layouts/dimensions to avoid mis-positioned views. 
 * When used in a CoordinatorLayout, FAB is known to have its margin values ignored / misused under certain circumstances; as a workaround the library always adds left or right margin values (depending on gravity), taking into account the SDK version too. 
 
 ### License
