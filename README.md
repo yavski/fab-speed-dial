@@ -8,7 +8,7 @@ Similarly tо [NavigationView] (http://developer.android.com/reference/android/s
 ##### Add the dependency to gradle.build
 ```
 dependencies {
-    compile 'io.github.yavski:fab-speed-dial:1.0.0'
+    compile 'io.github.yavski:fab-speed-dial:1.0.1'
 }
 ```
 
