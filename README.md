@@ -1,3 +1,5 @@
+[![Android Gems](http://www.android-gems.com/badge/yavski/fab-speed-dial.svg?branch=master)](http://www.android-gems.com/lib/yavski/fab-speed-dial)
+
 ### fab-speed-dial
 A simple to use library addressing the lack of support for [Speed dial] (https://www.google.com/design/spec/components/buttons-floating-action-button.html#buttons-floating-action-button-transitions) transitions in Design Support Library. 
 
