@@ -33,7 +33,7 @@
         <item name="paddingStart">0dp</item>
     </style>
 
-    <style name="CardView">
+    <style name="TitleCardView">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:clickable">true</item>
         <item name="cardBackgroundColor">@android:color/white</item>
