@@ -1,6 +1,7 @@
-[![Android Gems](http://www.android-gems.com/badge/yavski/fab-speed-dial.svg?branch=master)](http://www.android-gems.com/lib/yavski/fab-speed-dial)
-
 ### fab-speed-dial
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-fab--speed--dial-green.svg?style=true)](https://android-arsenal.com/details/1/3062) [![Android Gems](http://www.android-gems.com/badge/yavski/fab-speed-dial.svg?branch=master)](http://www.android-gems.com/lib/yavski/fab-speed-dial)
+
 A simple to use library addressing the lack of support for [Speed dial] (https://www.google.com/design/spec/components/buttons-floating-action-button.html#buttons-floating-action-button-transitions) transitions in Design Support Library. 
 
 Similarly tо [NavigationView] (http://developer.android.com/reference/android/support/design/widget/NavigationView.html?utm_campaign=io15&utm_source=dac&utm_medium=blog), [ActionBar] (http://developer.android.com/reference/android/app/ActionBar.html) and [Activity](http://developer.android.com/reference/android/app/Activity.html), [FabSpeedDial] (https://github.com/yavski/fab-speed-dial/blob/master/library/src/main/java/io/github/yavski/fabspeeddial/FabSpeedDial.java) makes use of [menu resources] (http://developer.android.com/guide/topics/resources/menu-resource.html) in order to present a list of actionable buttons. This makes the library somewhat familiar to use and easy to integrate. The library runs on Android 2.2 (API8) onwards.
@@ -10,7 +11,7 @@ Similarly tо [NavigationView] (http://developer.android.com/reference/android/s
 ##### Add the dependency to gradle.build
 ```
 dependencies {
-    compile 'io.github.yavski:fab-speed-dial:1.0.1'
+    compile 'io.github.yavski:fab-speed-dial:1.0.2'
 }
 ```
 
