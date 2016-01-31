@@ -23,6 +23,8 @@
     <string name="sample_activity_title">%1$s Sample</string>
     <string name="selected_menu_item">Menu item: %1$s</string>
 
+    <string name="what_is_the_name_of_your_puppy">What is the name of your puppy?</string>
+
     <string-array name="title_array">
         <item>Position</item>
         <item>Style</item>
@@ -35,15 +37,6 @@
         <item>Style up FAB and change the appearance of the menu items</item>
         <item>Register a callback to receive the click events of the menu items</item>
         <item>Update your menu items dynamically</item>
-    </string-array>
-
-    <string name="choose_gravity">Choose gravity</string>
-
-    <string-array name="gravity_array">
-        <item>BOTTOM_END</item>
-        <item>BOTTOM_START</item>
-        <item>TOP_END</item>
-        <item>TOP_START</item>
     </string-array>
 
 </resources>
