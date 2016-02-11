@@ -48,8 +48,8 @@ dependencies {
         android:layout_gravity="bottom|end"
         app:fabGravity="bottom_end"
         app:fabMenu="@menu/menu_main"
-        app:miniFabBackgroundTintColor="@android:color/white"
-        app:miniFabImageTintColor="?attr/colorPrimaryDark"
+        app:miniFabBackgroundTint="@android:color/white"
+        app:miniFabDrawableTint="?attr/colorPrimaryDark"
         app:miniFabTitleTextColor="?attr/colorPrimaryDark" />
 
 </FrameLayout>
