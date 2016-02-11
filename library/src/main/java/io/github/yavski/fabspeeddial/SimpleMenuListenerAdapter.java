@@ -20,4 +20,8 @@ public class SimpleMenuListenerAdapter implements FabSpeedDial.MenuListener {
     public boolean onMenuItemSelected(MenuItem menuItem) {
         return false;
     }
+
+    @Override
+    public void onMenuClosed() {
+    }
 }

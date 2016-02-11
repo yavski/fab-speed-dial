@@ -84,6 +84,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
          */
         boolean onMenuItemSelected(MenuItem menuItem);
 
+        void onMenuClosed();
     }
 
     private static final String TAG = FabSpeedDial.class.getSimpleName();
@@ -277,6 +278,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
                 }
             });
         }
+
+        setOnClickListener(this);
     }
 
     private void newNavigationMenu() {
@@ -301,7 +304,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         removeFabMenuItems();
 
         if (menuListener != null) {
-            if (v instanceof FloatingActionButton) {
+            if (v == this) {
+                menuListener.onMenuClosed();
+            } else if (v instanceof FloatingActionButton) {
                 menuListener.onMenuItemSelected(fabMenuItemMap.get(v));
             } else if (v instanceof CardView) {
                 menuListener.onMenuItemSelected(cardViewMenuItemMap.get(v));
@@ -319,7 +324,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         ViewCompat.setAlpha(menuItemsLayout, 1f);
         for (int i = 0; i < navigationMenu.size(); i++) {
             MenuItem menuItem = navigationMenu.getItem(i);
-            menuItemsLayout.addView(createFabMenuItem(menuItem));
+            if (menuItem.isVisible()) {
+                menuItemsLayout.addView(createFabMenuItem(menuItem));
+            }
         }
         animateFabMenuItemsIn();
     }
