@@ -319,7 +319,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         ViewCompat.setAlpha(menuItemsLayout, 1f);
         for (int i = 0; i < navigationMenu.size(); i++) {
             MenuItem menuItem = navigationMenu.getItem(i);
-            menuItemsLayout.addView(createFabMenuItem(menuItem));
+            if (menuItem.isVisible()) {
+                menuItemsLayout.addView(createFabMenuItem(menuItem));
+            }
         }
         animateFabMenuItemsIn();
     }

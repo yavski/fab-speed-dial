@@ -19,6 +19,7 @@ package io.github.yavski.fabspeeddial.samples;
 import android.os.Bundle;
 import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -44,21 +45,36 @@ public class MenuItemsSampleActivity extends BaseSampleActivity {
             @Override
             public boolean onPrepareMenu(NavigationMenu navigationMenu) {
                 String input = inputView.getText().toString();
+
                 if (TextUtils.isEmpty(input)) {
                     Snackbar.make(findViewById(R.id.rootView), "Enter the name of your puppy",
                             Snackbar.LENGTH_SHORT).show();
                     return false;
-                } else {
-                    for (int i = 0; i < navigationMenu.size(); i++) {
-                        MenuItem menuItem = navigationMenu.getItem(i);
-                        String oldMenuItemTitle = menuItem.getTitle().toString();
-                        menuItem.setTitle(oldMenuItemTitle + " " + input);
-                    }
-                    return true;
                 }
+
+                setMenuItemTitle(navigationMenu, R.id.action_call, input);
+                setMenuItemTitle(navigationMenu, R.id.action_text, input);
+                setMenuItemTitle(navigationMenu, R.id.action_email, input);
+
+                setMenuItemVisibility(navigationMenu, R.id.action_call, R.id.menu_item_call_switch);
+                setMenuItemVisibility(navigationMenu, R.id.action_text, R.id.menu_item_text_switch);
+                setMenuItemVisibility(navigationMenu, R.id.action_email, R.id.menu_item_email_switch);
+
+                return true;
             }
         });
 
+    }
+
+    private void setMenuItemTitle(NavigationMenu menu, int menuItemId, CharSequence input) {
+        MenuItem menuItem = menu.findItem(menuItemId);
+        String oldMenuItemTitle = menuItem.getTitle().toString();
+        menuItem.setTitle(oldMenuItemTitle + " " + input);
+    }
+
+    private void setMenuItemVisibility(NavigationMenu menu, int menuItemId, int switchItem) {
+        SwitchCompat switchView = (SwitchCompat) findViewById(switchItem);
+        menu.findItem(menuItemId).setVisible(switchView.isChecked());
     }
 
 }
