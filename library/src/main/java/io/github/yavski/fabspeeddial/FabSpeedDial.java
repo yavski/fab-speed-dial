@@ -206,7 +206,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             miniFabTitleBackgroundTint = getColorStateList(R.color.mini_fab_title_background_tint);
         }
 
-        miniFabTitlesEnabled = typedArray.getBoolean(R.styleable.FabSpeedDial_miniFabTitleShow, true);
+        miniFabTitlesEnabled = typedArray.getBoolean(R.styleable.FabSpeedDial_miniFabTitlesEnabled, true);
 
 
         miniFabTitleTextColor = typedArray.getColor(R.styleable.FabSpeedDial_miniFabTitleTextColor,
@@ -356,7 +356,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
         final CharSequence title = menuItem.getTitle();
         if (!TextUtils.isEmpty(title) && miniFabTitlesEnabled) {
-            cardView.setBackgroundColor(miniFabTitleBackgroundTint.getDefaultColor());
+            cardView.setCardBackgroundColor(miniFabTitleBackgroundTint.getDefaultColor());
             titleView.setText(title);
             titleView.setTypeface(null, Typeface.BOLD);
             titleView.setTextColor(miniFabTitleTextColor);
