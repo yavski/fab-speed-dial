@@ -35,6 +35,9 @@
         <attr name="miniFabDrawableTint" format="color|reference" />
         <attr name="miniFabTitleTextColor" format="color|reference" />
 
+        <attr name="miniFabTitleBackgroundTint" format="color|reference"/>
+        <attr name="miniFabTitlesEnabled" format="boolean"/>
+
     </declare-styleable>
 
 </resources>
