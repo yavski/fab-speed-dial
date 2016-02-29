@@ -44,10 +44,12 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -84,6 +86,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
          */
         boolean onMenuItemSelected(MenuItem menuItem);
 
+        void onMenuClosed();
     }
 
     private static final String TAG = FabSpeedDial.class.getSimpleName();
@@ -106,6 +109,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     private LinearLayout menuItemsLayout;
     FloatingActionButton fab;
+    private View touchGuard = null;
 
     private int menuId;
     private int fabGravity;
@@ -117,6 +121,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private ColorStateList miniFabTitleBackgroundTint;
     private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
+    private boolean useTouchGuard;
 
     private boolean isAnimating;
 
@@ -202,7 +207,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         }
 
         miniFabTitleBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabTitleBackgroundTint);
-        if(miniFabTitleBackgroundTint == null){
+        if (miniFabTitleBackgroundTint == null) {
             miniFabTitleBackgroundTint = getColorStateList(R.color.mini_fab_title_background_tint);
         }
 
@@ -211,6 +216,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
         miniFabTitleTextColor = typedArray.getColor(R.styleable.FabSpeedDial_miniFabTitleTextColor,
                 ContextCompat.getColor(getContext(), R.color.title_text_color));
+
+        useTouchGuard = typedArray.getBoolean(R.styleable.FabSpeedDial_touchGuard, false);
     }
 
     @Override
@@ -268,25 +275,26 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         // Needed in order to intercept key events
         setFocusableInTouchMode(true);
 
-        // Check if the view was inflated through the standard pipeline and set a click menuListener
-        // to the root in order to dismiss itself when tapped outside its bounds
-        if (getContext() instanceof Activity) {
-            Activity activity = ((Activity) getContext());
-            View view = activity.findViewById(android.R.id.content);
-            view.setOnTouchListener(new OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    Rect rect = new Rect();
-                    getHitRect(rect);
-                    if (!rect.contains((int) event.getX(), (int) event.getY())) {
-                        fab.setSelected(false);
-                        removeFabMenuItems();
-                        return true;
-                    }
-                    return false;
-                }
-            });
+        if (useTouchGuard) {
+            ViewParent parent = getParent();
+
+            touchGuard = new View(getContext());
+            touchGuard.setOnClickListener(this);
+            touchGuard.setWillNotDraw(true);
+            touchGuard.setVisibility(GONE);
+            if (parent instanceof FrameLayout) {
+                ((FrameLayout) parent).addView(touchGuard, ((FrameLayout) parent).indexOfChild(this));
+            } else if (parent instanceof RelativeLayout) {
+                ((RelativeLayout) parent).addView(
+                        touchGuard, ((RelativeLayout) parent).indexOfChild(this),
+                        new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.MATCH_PARENT));
+            } else {
+                Log.d(TAG, "touchGuard requires that the parent of this FabSpeedDialer be a FrameLayout or RelativeLayout");
+            }
         }
+
+        setOnClickListener(this);
     }
 
     private void newNavigationMenu() {
@@ -311,7 +319,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         removeFabMenuItems();
 
         if (menuListener != null) {
-            if (v instanceof FloatingActionButton) {
+            if (v == this || v == touchGuard) {
+                menuListener.onMenuClosed();
+            } else if (v instanceof FloatingActionButton) {
                 menuListener.onMenuItemSelected(fabMenuItemMap.get(v));
             } else if (v instanceof CardView) {
                 menuListener.onMenuItemSelected(cardViewMenuItemMap.get(v));
@@ -373,6 +383,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     }
 
     private void removeFabMenuItems() {
+        if (touchGuard != null) touchGuard.setVisibility(GONE);
+
         ViewCompat.animate(menuItemsLayout)
                 .setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
                 .alpha(0f)
@@ -395,6 +407,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     }
 
     private void animateFabMenuItemsIn() {
+        if (touchGuard != null) touchGuard.setVisibility(VISIBLE);
+
         final int count = menuItemsLayout.getChildCount();
 
         if (isGravityBottom()) {
@@ -416,7 +430,6 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
                 }
             }
         }
-
     }
 
     private void animateViewIn(final View view, int position) {
