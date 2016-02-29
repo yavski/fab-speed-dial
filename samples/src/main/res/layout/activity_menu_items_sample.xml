@@ -57,6 +57,67 @@
             android:layout_height="wrap_content"
             android:inputType="textCapWords" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/keyline_1"
+            android:text="@string/visibility" />
+
+        <FrameLayout
+            style="@style/SwitchContainer"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_item_call" />
+
+            <android.support.v7.widget.SwitchCompat
+                style="@style/Switch"
+                android:id="@+id/menu_item_call_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            style="@style/SwitchContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_item_text" />
+
+            <android.support.v7.widget.SwitchCompat
+                style="@style/Switch"
+                android:id="@+id/menu_item_text_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            style="@style/SwitchContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_item_email" />
+
+            <android.support.v7.widget.SwitchCompat
+                style="@style/Switch"
+                android:id="@+id/menu_item_email_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
     </LinearLayout>
 
     <io.github.yavski.fabspeeddial.FabSpeedDial

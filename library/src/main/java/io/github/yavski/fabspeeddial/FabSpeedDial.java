@@ -117,6 +117,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private ColorStateList fabBackgroundTint;
     private ColorStateList miniFabDrawableTint;
     private ColorStateList miniFabBackgroundTint;
+    private ColorStateList miniFabTitleBackgroundTint;
+    private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
     private boolean useTouchGuard;
 
@@ -202,6 +204,14 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         if (miniFabDrawableTint == null) {
             miniFabDrawableTint = getColorStateList(R.color.mini_fab_drawable_tint);
         }
+
+        miniFabTitleBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabTitleBackgroundTint);
+        if(miniFabTitleBackgroundTint == null){
+            miniFabTitleBackgroundTint = getColorStateList(R.color.mini_fab_title_background_tint);
+        }
+
+        miniFabTitlesEnabled = typedArray.getBoolean(R.styleable.FabSpeedDial_miniFabTitlesEnabled, true);
+
 
         miniFabTitleTextColor = typedArray.getColor(R.styleable.FabSpeedDial_miniFabTitleTextColor,
             ContextCompat.getColor(getContext(), R.color.title_text_color));
@@ -349,7 +359,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         ViewCompat.setAlpha(cardView, 0f);
 
         final CharSequence title = menuItem.getTitle();
-        if (!TextUtils.isEmpty(title)) {
+        if (!TextUtils.isEmpty(title) && miniFabTitlesEnabled) {
+            cardView.setCardBackgroundColor(miniFabTitleBackgroundTint.getDefaultColor());
             titleView.setText(title);
             titleView.setTypeface(null, Typeface.BOLD);
             titleView.setTextColor(miniFabTitleTextColor);

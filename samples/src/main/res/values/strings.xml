@@ -24,6 +24,7 @@
     <string name="selected_menu_item">Menu item: %1$s</string>
 
     <string name="what_is_the_name_of_your_puppy">What is the name of your puppy?</string>
+    <string name="visibility">Visibility</string>
 
     <string-array name="title_array">
         <item>Position</item>
@@ -36,7 +37,7 @@
         <item>Set fabGravity in order to position the view in your view group</item>
         <item>Style up FAB and change the appearance of the menu items</item>
         <item>Register a callback to receive the click events of the menu items</item>
-        <item>Update your menu items dynamically</item>
+        <item>Update dynamically the title and visibility of your menu items</item>
     </string-array>
 
 </resources>

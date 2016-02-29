@@ -2,16 +2,16 @@
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-fab--speed--dial-green.svg?style=true)](https://android-arsenal.com/details/1/3062) [![Android Gems](http://www.android-gems.com/badge/yavski/fab-speed-dial.svg?branch=master)](http://www.android-gems.com/lib/yavski/fab-speed-dial)
 
-A simple to use library addressing the lack of support for [Speed dial] (https://www.google.com/design/spec/components/buttons-floating-action-button.html#buttons-floating-action-button-transitions) transitions in Design Support Library. 
+A simple library marrying together [FAB] (http://developer.android.com/reference/android/support/design/widget/FloatingActionButton.html) + [menu resources] (http://developer.android.com/guide/topics/resources/menu-resource.html) + [Speed dial metaphor from Material Design] (https://www.google.com/design/spec/components/buttons-floating-action-button.html#buttons-floating-action-button-transitions). 
 
-Similarly tо [NavigationView] (http://developer.android.com/reference/android/support/design/widget/NavigationView.html?utm_campaign=io15&utm_source=dac&utm_medium=blog), [ActionBar] (http://developer.android.com/reference/android/app/ActionBar.html) and [Activity](http://developer.android.com/reference/android/app/Activity.html), [FabSpeedDial] (https://github.com/yavski/fab-speed-dial/blob/master/library/src/main/java/io/github/yavski/fabspeeddial/FabSpeedDial.java) makes use of [menu resources] (http://developer.android.com/guide/topics/resources/menu-resource.html) in order to present a list of actionable buttons. This makes the library somewhat familiar to use and easy to integrate. The library runs on Android 2.2 (API8) onwards.
+Similarly tо [NavigationView] (http://developer.android.com/reference/android/support/design/widget/NavigationView.html?utm_campaign=io15&utm_source=dac&utm_medium=blog) and [ActionBar] (http://developer.android.com/reference/android/app/ActionBar.html), [FabSpeedDial] (https://github.com/yavski/fab-speed-dial/blob/master/library/src/main/java/io/github/yavski/fabspeeddial/FabSpeedDial.java) makes use of [menu resources] (http://developer.android.com/guide/topics/resources/menu-resource.html) in order to present a list of actionable buttons. This makes the library somewhat familiar to use and easy to integrate. The library runs on Android 2.2 (API 8) onwards.
 
 ### Gettting started
 
 ##### Add the dependency to gradle.build
 ```
 dependencies {
-    compile 'io.github.yavski:fab-speed-dial:1.0.2'
+    compile 'io.github.yavski:fab-speed-dial:1.0.3'
 }
 ```
 
@@ -48,8 +48,8 @@ dependencies {
         android:layout_gravity="bottom|end"
         app:fabGravity="bottom_end"
         app:fabMenu="@menu/menu_main"
-        app:miniFabBackgroundTintColor="@android:color/white"
-        app:miniFabImageTintColor="?attr/colorPrimaryDark"
+        app:miniFabBackgroundTint="@android:color/white"
+        app:miniFabDrawableTint="?attr/colorPrimaryDark"
         app:miniFabTitleTextColor="?attr/colorPrimaryDark" />
 
 </FrameLayout>
@@ -107,6 +107,9 @@ The following attribtues are supported:
 | app:fabBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the main FAB |
 | app:miniFabDrawableTint | [android:tint](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:tint) | Tints the icon drawable of the mini FAB(s) |
 | app:miniFabBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the mini FAB(s) |
+| app:miniFabTitleBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the title(s) of the mini FAB(s) |
+| app:miniFabTitlesEnabled | | Convinience for hiding the tilte(s) of the mini FAB(s) 
+
 
 ### Caveats
 

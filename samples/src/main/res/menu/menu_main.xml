@@ -26,14 +26,14 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_settings_2"
+        android:id="@+id/action_text"
         android:icon="@drawable/ic_chat_bubble_outline_black_24px"
         android:orderInCategory="100"
         android:title="@string/menu_item_text"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_settings_3"
+        android:id="@+id/action_email"
         android:icon="@drawable/ic_mail_outline_black_24px"
         android:orderInCategory="100"
         android:title="@string/menu_item_email"

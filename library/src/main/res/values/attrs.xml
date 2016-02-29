@@ -36,6 +36,9 @@
         <attr name="miniFabTitleTextColor" format="color|reference" />
         <attr name="touchGuard" format="boolean" />
 
+        <attr name="miniFabTitleBackgroundTint" format="color|reference"/>
+        <attr name="miniFabTitlesEnabled" format="boolean"/>
+
     </declare-styleable>
 
 </resources>
