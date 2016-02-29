@@ -49,6 +49,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -206,7 +207,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         }
 
         miniFabTitleBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabTitleBackgroundTint);
-        if(miniFabTitleBackgroundTint == null){
+        if (miniFabTitleBackgroundTint == null) {
             miniFabTitleBackgroundTint = getColorStateList(R.color.mini_fab_title_background_tint);
         }
 
@@ -214,7 +215,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
 
         miniFabTitleTextColor = typedArray.getColor(R.styleable.FabSpeedDial_miniFabTitleTextColor,
-            ContextCompat.getColor(getContext(), R.color.title_text_color));
+                ContextCompat.getColor(getContext(), R.color.title_text_color));
 
         useTouchGuard = typedArray.getBoolean(R.styleable.FabSpeedDial_touchGuard, false);
     }
@@ -277,14 +278,19 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         if (useTouchGuard) {
             ViewParent parent = getParent();
 
+            touchGuard = new View(getContext());
+            touchGuard.setOnClickListener(this);
+            touchGuard.setWillNotDraw(true);
+            touchGuard.setVisibility(GONE);
             if (parent instanceof FrameLayout) {
-                touchGuard = new View(getContext());
                 ((FrameLayout) parent).addView(touchGuard, ((FrameLayout) parent).indexOfChild(this));
-                touchGuard.setOnClickListener(this);
-                touchGuard.setWillNotDraw(true);
-                touchGuard.setVisibility(GONE);
+            } else if (parent instanceof RelativeLayout) {
+                ((RelativeLayout) parent).addView(
+                        touchGuard, ((RelativeLayout) parent).indexOfChild(this),
+                        new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.MATCH_PARENT));
             } else {
-                Log.d(TAG, "touchGuard requires that the parent of this FabSpeedDialer be a FrameLayout");
+                Log.d(TAG, "touchGuard requires that the parent of this FabSpeedDialer be a FrameLayout or RelativeLayout");
             }
         }
 
