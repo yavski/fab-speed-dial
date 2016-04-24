@@ -250,25 +250,10 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             public void onClick(View v) {
                 if (isAnimating) return;
 
-                if (menuItemsLayout.getChildCount() > 0) {
-                    v.setSelected(false);
-                    removeFabMenuItems();
+                if (isMenuOpen()) {
+                    closeMenu();
                 } else {
-
-                    requestFocus();
-
-                    boolean showMenu = true;
-                    if (menuListener != null) {
-                        newNavigationMenu();
-                        showMenu = menuListener.onPrepareMenu(navigationMenu);
-                    }
-
-                    if (showMenu) {
-                        addMenuItems();
-                        fab.setSelected(true);
-                    } else {
-                        fab.setSelected(false);
-                    }
+                    openMenu();
                 }
             }
         });
@@ -347,6 +332,58 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     public void setMenuListener(MenuListener menuListener) {
         this.menuListener = menuListener;
+    }
+
+    public boolean isMenuOpen() {
+        return menuItemsLayout.getChildCount() > 0;
+    }
+
+    public void openMenu() {
+        if (!ViewCompat.isAttachedToWindow(this))
+            return;
+        requestFocus();
+
+        boolean showMenu = true;
+        if (menuListener != null) {
+            newNavigationMenu();
+            showMenu = menuListener.onPrepareMenu(navigationMenu);
+        }
+
+        if (showMenu) {
+            addMenuItems();
+            fab.setSelected(true);
+        } else {
+            fab.setSelected(false);
+        }
+    }
+
+    public void closeMenu() {
+        if (!ViewCompat.isAttachedToWindow(this))
+            return;
+
+        if (isMenuOpen()) {
+            fab.setSelected(false);
+            removeFabMenuItems();
+            if (menuListener != null) {
+                menuListener.onMenuClosed();
+            }
+        }
+    }
+
+    public void show() {
+        if (!ViewCompat.isAttachedToWindow(this))
+            return;
+        fab.show();
+    }
+
+    public void hide() {
+        if (!ViewCompat.isAttachedToWindow(this))
+            return;
+
+        if (isMenuOpen()) {
+            closeMenu();
+        }
+        fab.hide();
     }
 
     private void addMenuItems() {
@@ -509,12 +546,11 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     @Override
     public boolean dispatchKeyEventPreIme(KeyEvent event) {
-        if (menuItemsLayout.getChildCount() > 0
+        if (isMenuOpen()
                 && event.getKeyCode() == KeyEvent.KEYCODE_BACK
                 && event.getAction() == KeyEvent.ACTION_UP
                 && event.getRepeatCount() == 0) {
-            fab.setSelected(false);
-            removeFabMenuItems();
+            closeMenu();
             return true;
         }
 
