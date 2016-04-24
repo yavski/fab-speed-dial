@@ -46,29 +46,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            app:fabGravity="bottom_end"
             app:fabMenu="@menu/menu_main"
-            app:fabGravity="bottom_end" />
+            app:touchGuard="false" />
 
         <io.github.yavski.fabspeeddial.FabSpeedDial
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
+            app:fabGravity="bottom_start"
             app:fabMenu="@menu/menu_main"
-            app:fabGravity="bottom_start" />
+            app:touchGuard="false" />
 
         <io.github.yavski.fabspeeddial.FabSpeedDial
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
+            app:fabGravity="top_start"
             app:fabMenu="@menu/menu_main"
-            app:fabGravity="top_start" />
+            app:touchGuard="false" />
 
         <io.github.yavski.fabspeeddial.FabSpeedDial
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"
+            app:fabGravity="top_end"
             app:fabMenu="@menu/menu_main"
-            app:fabGravity="top_end" />
+            app:touchGuard="false" />
 
     </FrameLayout>
 

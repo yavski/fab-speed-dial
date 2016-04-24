@@ -17,11 +17,9 @@
 package io.github.yavski.fabspeeddial;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -121,6 +119,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private ColorStateList miniFabTitleBackgroundTint;
     private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
+    private Drawable touchGuardDrawable;
     private boolean useTouchGuard;
 
     private boolean isAnimating;
@@ -217,7 +216,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         miniFabTitleTextColor = typedArray.getColor(R.styleable.FabSpeedDial_miniFabTitleTextColor,
                 ContextCompat.getColor(getContext(), R.color.title_text_color));
 
-        useTouchGuard = typedArray.getBoolean(R.styleable.FabSpeedDial_touchGuard, false);
+        touchGuardDrawable = typedArray.getDrawable(R.styleable.FabSpeedDial_touchGuardDrawable);
+
+        useTouchGuard = typedArray.getBoolean(R.styleable.FabSpeedDial_touchGuard, true);
     }
 
     @Override
@@ -282,8 +283,21 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             touchGuard.setOnClickListener(this);
             touchGuard.setWillNotDraw(true);
             touchGuard.setVisibility(GONE);
+
+            if (touchGuardDrawable != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    touchGuard.setBackground(touchGuardDrawable);
+                } else {
+                    touchGuard.setBackgroundDrawable(touchGuardDrawable);
+                }
+            }
+
             if (parent instanceof FrameLayout) {
-                ((FrameLayout) parent).addView(touchGuard, ((FrameLayout) parent).indexOfChild(this));
+                FrameLayout frameLayout = (FrameLayout) parent;
+                frameLayout.addView(touchGuard, frameLayout.indexOfChild(this));
+            } else if (parent instanceof CoordinatorLayout) {
+                CoordinatorLayout coordinatorLayout = (CoordinatorLayout) parent;
+                coordinatorLayout.addView(touchGuard, coordinatorLayout.indexOfChild(this));
             } else if (parent instanceof RelativeLayout) {
                 ((RelativeLayout) parent).addView(
                         touchGuard, ((RelativeLayout) parent).indexOfChild(this),

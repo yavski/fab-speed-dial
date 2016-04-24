@@ -34,10 +34,13 @@
         <attr name="miniFabBackgroundTint" format="color|reference" />
         <attr name="miniFabDrawableTint" format="color|reference" />
         <attr name="miniFabTitleTextColor" format="color|reference" />
+
         <attr name="touchGuard" format="boolean" />
+        <attr name="touchGuardDrawable" format="color|reference" />
 
         <attr name="miniFabTitleBackgroundTint" format="color|reference"/>
         <attr name="miniFabTitlesEnabled" format="boolean"/>
+
 
     </declare-styleable>
 

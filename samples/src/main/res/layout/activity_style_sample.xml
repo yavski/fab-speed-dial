@@ -42,12 +42,19 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/lorem_ipsum" />
+
         <io.github.yavski.fabspeeddial.FabSpeedDial
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            app:fabMenu="@menu/menu_main"
+            app:touchGuardDrawable="@drawable/background"
             app:fabGravity="bottom_end"
+            app:fabMenu="@menu/menu_main"
             app:miniFabBackgroundTint="@android:color/white"
             app:miniFabDrawableTint="?attr/colorPrimaryDark"
             app:miniFabTitleTextColor="?attr/colorPrimaryDark" />
