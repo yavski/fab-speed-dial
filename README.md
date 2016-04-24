@@ -11,7 +11,7 @@ Similarly tо [NavigationView] (http://developer.android.com/reference/android/s
 ##### Add the dependency to gradle.build
 ```
 dependencies {
-    compile 'io.github.yavski:fab-speed-dial:1.0.3'
+    compile 'io.github.yavski:fab-speed-dial:1.0.4'
 }
 ```
 
@@ -108,8 +108,9 @@ The following attribtues are supported:
 | app:miniFabDrawableTint | [android:tint](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:tint) | Tints the icon drawable of the mini FAB(s) |
 | app:miniFabBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the mini FAB(s) |
 | app:miniFabTitleBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the title(s) of the mini FAB(s) |
-| app:miniFabTitlesEnabled | | Convinience for hiding the tilte(s) of the mini FAB(s) 
-
+| app:miniFabTitlesEnabled | | Convinience for hiding the tilte(s) of the mini FAB(s) |
+| app:touchGuard | | Hide FAB when touching out of its bounds |
+| app:touchGuardDrawable | [android:background](http://developer.android.com/reference/android/view/View.html#setBackground(android.graphics.drawable.Drawable)) | Sets background to the container of FAB 
 
 ### Caveats
 
