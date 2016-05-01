@@ -121,6 +121,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private int miniFabTitleTextColor;
     private Drawable touchGuardDrawable;
     private boolean useTouchGuard;
+    private int customMenuItemLayoutEnd;
+    private int customMenuItemLayoutStart;
 
     private boolean isAnimating;
 
@@ -219,6 +221,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         touchGuardDrawable = typedArray.getDrawable(R.styleable.FabSpeedDial_touchGuardDrawable);
 
         useTouchGuard = typedArray.getBoolean(R.styleable.FabSpeedDial_touchGuard, true);
+
+        customMenuItemLayoutEnd = typedArray.getResourceId(R.styleable.FabSpeedDial_menuItemLayoutEnd, 0);
+        customMenuItemLayoutStart = typedArray.getResourceId(R.styleable.FabSpeedDial_menuItemLayoutStart, 0);
     }
 
     @Override
@@ -516,9 +521,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     private int getMenuItemLayoutId() {
         if (isGravityEnd()) {
-            return R.layout.fab_menu_item_end;
+            return (customMenuItemLayoutEnd != 0)? customMenuItemLayoutEnd : R.layout.fab_menu_item_end;
         } else {
-            return R.layout.fab_menu_item_start;
+            return (customMenuItemLayoutStart != 0)? customMenuItemLayoutStart : R.layout.fab_menu_item_start;
         }
     }
 
