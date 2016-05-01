@@ -57,7 +57,9 @@
             app:fabMenu="@menu/menu_main"
             app:miniFabBackgroundTint="@android:color/white"
             app:miniFabDrawableTint="?attr/colorPrimaryDark"
-            app:miniFabTitleTextColor="?attr/colorPrimaryDark" />
+            app:miniFabTitleTextColor="?attr/colorPrimaryDark"
+            app:menuItemLayoutEnd="@layout/custom_fab_menu_item_end"
+            app:menuItemLayoutStart="@layout/custom_fab_menu_item_start" />
 
     </FrameLayout>
 

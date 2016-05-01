@@ -111,6 +111,8 @@ The following attribtues are supported:
 | app:miniFabTitlesEnabled | | Convinience for hiding the tilte(s) of the mini FAB(s) |
 | app:touchGuard | | Hide FAB when touching out of its bounds |
 | app:touchGuardDrawable | [android:background](http://developer.android.com/reference/android/view/View.html#setBackground(android.graphics.drawable.Drawable)) | Sets background to the container of FAB 
+| app:menuItemLayoutStart | | Defines a layout for menu items (if start gravity)
+| app: menuItemLayoutEnd | | Defines a layout for menu items (if end gravity)
 
 ### Caveats
 
