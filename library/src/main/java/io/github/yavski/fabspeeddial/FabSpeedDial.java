@@ -227,6 +227,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     public void setFabDrawable(Drawable fabDrawable) {
         this.fabDrawable = fabDrawable;
+        fab.setImageDrawable(fabDrawable);
     }
 
     public ColorStateList getFabDrawableTint() {
@@ -235,6 +236,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     public void setFabDrawableTint(ColorStateList fabDrawableTint) {
         this.fabDrawableTint = fabDrawableTint;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            fab.setImageTintList(fabDrawableTint);
+        }
     }
 
     public ColorStateList getFabBackgroundTint() {
@@ -243,6 +247,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     public void setFabBackgroundTint(ColorStateList fabBackgroundTint) {
         this.fabBackgroundTint = fabBackgroundTint;
+        if (fabBackgroundTint != null) {
+            fab.setBackgroundTintList(fabBackgroundTint);
+        }
     }
 
     public ColorStateList getMiniFabDrawableTint() {
@@ -291,6 +298,11 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     public void setTouchGuardDrawable(Drawable touchGuardDrawable) {
         this.touchGuardDrawable = touchGuardDrawable;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            touchGuard.setBackground(touchGuardDrawable);
+        } else {
+            touchGuard.setBackgroundDrawable(touchGuardDrawable);
+        }
     }
 
     public boolean isUseTouchGuard() {
