@@ -227,7 +227,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     public void setFabDrawable(Drawable fabDrawable) {
         this.fabDrawable = fabDrawable;
-        fab.setImageDrawable(fabDrawable);
+        if (fab!=null) {
+            fab.setImageDrawable(fabDrawable);
+        }
     }
 
     public ColorStateList getFabDrawableTint() {
@@ -236,7 +238,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     public void setFabDrawableTint(ColorStateList fabDrawableTint) {
         this.fabDrawableTint = fabDrawableTint;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (fab!=null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             fab.setImageTintList(fabDrawableTint);
         }
     }
@@ -247,7 +249,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     public void setFabBackgroundTint(ColorStateList fabBackgroundTint) {
         this.fabBackgroundTint = fabBackgroundTint;
-        if (fabBackgroundTint != null) {
+        if (fab!=null && fabBackgroundTint != null) {
             fab.setBackgroundTintList(fabBackgroundTint);
         }
     }
@@ -298,10 +300,12 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     public void setTouchGuardDrawable(Drawable touchGuardDrawable) {
         this.touchGuardDrawable = touchGuardDrawable;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            touchGuard.setBackground(touchGuardDrawable);
-        } else {
-            touchGuard.setBackgroundDrawable(touchGuardDrawable);
+        if (touchGuard != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                touchGuard.setBackground(touchGuardDrawable);
+            } else {
+                touchGuard.setBackgroundDrawable(touchGuardDrawable);
+            }
         }
     }
 
