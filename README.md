@@ -57,6 +57,8 @@ dependencies {
 ##### Result
 <img src="http://yavski.github.io/fab-speed-dial/sample-01.gif" width="360">
 
+In order to save the menu open/closed state, **you must define an id to the FabSpeedDial**, otherwise if you rotate the device the state won't be persisted.
+
 ##### Events
 
 As with all menus, you have a callback just before the list of actionable items are presented. The callback allows you to update your menu items, or not show the menu altogether.

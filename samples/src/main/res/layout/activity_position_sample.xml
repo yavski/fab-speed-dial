@@ -43,6 +43,7 @@
         android:layout_marginTop="?attr/actionBarSize">
 
         <io.github.yavski.fabspeeddial.FabSpeedDial
+            android:id="@+id/position_bottom_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -51,6 +52,7 @@
             app:touchGuard="false" />
 
         <io.github.yavski.fabspeeddial.FabSpeedDial
+            android:id="@+id/position_bottom_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
@@ -59,6 +61,7 @@
             app:touchGuard="false" />
 
         <io.github.yavski.fabspeeddial.FabSpeedDial
+            android:id="@+id/position_top_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
@@ -67,6 +70,7 @@
             app:touchGuard="false" />
 
         <io.github.yavski.fabspeeddial.FabSpeedDial
+            android:id="@+id/position_top_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"
