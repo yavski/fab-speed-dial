@@ -116,6 +116,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private ColorStateList fabBackgroundTint;
     private ColorStateList miniFabDrawableTint;
     private ColorStateList miniFabBackgroundTint;
+    private int[] miniFabBackgroundTintArray;
     private ColorStateList miniFabTitleBackgroundTint;
     private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
@@ -198,6 +199,16 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         miniFabBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabBackgroundTint);
         if (miniFabBackgroundTint == null) {
             miniFabBackgroundTint = getColorStateList(R.color.fab_background_tint);
+        }
+
+        if(typedArray.hasValue(R.styleable.FabSpeedDial_miniFabBackgroundTintList)) {
+            int miniFabBackgroundTintListMenuId = typedArray.getResourceId(R.styleable.FabSpeedDial_miniFabBackgroundTintList, 0);
+            TypedArray miniFabBackgroundTintRes = getResources().obtainTypedArray(miniFabBackgroundTintListMenuId);
+            miniFabBackgroundTintArray = new int[miniFabBackgroundTintRes.length()];
+            for(int i = 0; i < miniFabBackgroundTintRes.length(); i++){
+                miniFabBackgroundTintArray[i] = miniFabBackgroundTintRes.getResourceId(i, 0);
+            }
+            miniFabBackgroundTintRes.recycle();
         }
 
         miniFabDrawableTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabDrawableTint);
@@ -426,6 +437,12 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         }
 
         miniFab.setBackgroundTintList(miniFabBackgroundTint);
+
+        if(miniFabBackgroundTintArray != null){
+            miniFab.setBackgroundTintList(ContextCompat.getColorStateList(getContext(),
+                    miniFabBackgroundTintArray[menuItem.getOrder()]));
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             miniFab.setImageTintList(miniFabDrawableTint);
         }
