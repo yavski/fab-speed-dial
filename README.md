@@ -7,7 +7,7 @@ I needed multi-color fabs like the ones you see in the Google Inbox app, so I ad
 Until yavski adds this to his repo, or until I add this to maven, you'll need to download this repo and add it as a module in your Android Studio project if you want the multi-color feature.
 
 #### Usage
-Just like the usage of the original, except you need to define an integer-array resource that contains the colors you want to use.
+Just like the usage of the original, in addition, you need to define an integer-array resource that contains the colors you want to use in the order of the items you want colored
 
 ```
 <integer-array name="fab_menu_item_colors">
@@ -21,6 +21,9 @@ Just like the usage of the original, except you need to define an integer-array 
 Then provide the new xml attribute `app:miniFabBackgroundTintList` a reference to your array resource.
 
 Example: `app:miniFabBackgroundTintList="@array/fab_menu_colors"`
+
+##### Result
+<img src="example.png" height=350>
 
 ---
 
