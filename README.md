@@ -1,3 +1,30 @@
+### Multi-color fab-speed-dial
+
+This is a fork of yavski's fab-speed-dial.
+
+I needed multi-color fabs like the ones you see in the Google Inbox app, so I added the feature.
+
+Until yavski adds this to his repo, or until I add this to maven, you'll need to download this repo and add it as a module in your Android Studio project if you want the multi-color feature.
+
+#### Usage
+Just like the usage of the original, except you need to define an integer-array resource that contains the colors you want to use.
+
+```
+<integer-array name="fab_menu_item_colors">
+        <item>@android:color/holo_green_light</item>
+        <item>@android:color/holo_blue_dark</item>
+        <item>@android:color/holo_purple</item>
+        <item>@android:color/holo_green_dark</item>
+        <item>@android:color/holo_red_dark</item>
+</integer-array>
+```
+Then provide the new xml attribute `app:miniFabBackgroundTintList` a reference to your array resource.
+
+Example: `app:miniFabBackgroundTintList="@array/fab_menu_colors"`
+
+---
+
+## Original Readme
 ### fab-speed-dial
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-fab--speed--dial-green.svg?style=true)](https://android-arsenal.com/details/1/3062) [![Android Gems](http://www.android-gems.com/badge/yavski/fab-speed-dial.svg?branch=master)](http://www.android-gems.com/lib/yavski/fab-speed-dial)
