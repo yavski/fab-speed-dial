@@ -23,6 +23,8 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -123,6 +125,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private boolean useTouchGuard;
 
     private boolean isAnimating;
+
+    //Variable to hold wheter the menu was open or not on config change
+    private boolean shouldOpenMenu;
 
     private FabSpeedDial(Context context) {
         super(context);
@@ -294,6 +299,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         }
 
         setOnClickListener(this);
+
+        if(shouldOpenMenu)
+            openMenu();
     }
 
     private void newNavigationMenu() {
@@ -328,6 +336,29 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         } else {
             Log.d(TAG, "You haven't provided a MenuListener.");
         }
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState ss = new SavedState(superState);
+
+        ss.isShowingMenu = isMenuOpen();
+
+        return ss;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if(!(state instanceof SavedState)){
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+
+        this.shouldOpenMenu = ss.isShowingMenu;
     }
 
     public void setMenuListener(MenuListener menuListener) {
@@ -555,6 +586,39 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         }
 
         return super.dispatchKeyEventPreIme(event);
+    }
+
+    static class SavedState extends BaseSavedState {
+
+        boolean isShowingMenu;
+
+        public SavedState(Parcel source) {
+            super(source);
+            this.isShowingMenu = source.readInt() == 1;
+        }
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeInt(this.isShowingMenu ? 1 : 0);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR = new Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel parcel) {
+                return new SavedState(parcel);
+            }
+
+            @Override
+            public SavedState[] newArray(int i) {
+                return new SavedState[i];
+            }
+        };
+
     }
 
 }
