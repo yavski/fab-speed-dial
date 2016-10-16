@@ -32,6 +32,7 @@
         <attr name="fabBackgroundTint" format="color|reference" />
 
         <attr name="miniFabBackgroundTint" format="color|reference" />
+        <attr name="miniFabBackgroundTintList" format="reference" />
         <attr name="miniFabDrawableTint" format="color|reference" />
         <attr name="miniFabTitleTextColor" format="color|reference" />
 
