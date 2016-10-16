@@ -16,6 +16,7 @@
 
 package io.github.yavski.fabspeeddial;
 
+import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
@@ -23,6 +24,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
+import android.util.AttributeSet;
 import android.view.View;
 
 import java.lang.reflect.InvocationTargetException;
@@ -60,6 +62,10 @@ public class FabSpeedDialBehaviour extends CoordinatorLayout.Behavior<FabSpeedDi
     private ViewPropertyAnimatorCompat mFabTranslationYAnimator;
     private float mFabTranslationY;
     private Rect mTmpRect;
+
+    public FabSpeedDialBehaviour(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, FabSpeedDial child, View dependency) {
