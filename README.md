@@ -90,6 +90,27 @@ Similarly, in order to be notified about a selection:
 
 ### Customisation
 
+##### Multi-colored fabs
+Define an integer-array resource that contains the colors you want to use in the order of the items you want colored:
+
+```
+<integer-array name="fab_menu_item_colors">
+    <!-- A dark Holo shade of red -->
+    <item>@android:color/holo_red_dark</item>
+    <!-- A Holo shade of purple -->
+    <item>@android:color/holo_purple</item>
+    <!-- A light Holo shade of green -->
+    <item>@android:color/holo_green_light</item>
+</integer-array>
+```
+
+Make sure you also assign [android:orderInCategory](https://developer.android.com/guide/topics/resources/menu-resource.html) to each menu item in your menu.xml in the same 0-based order.
+
+To provide the color array to the menu items use the following attributes: ```app:miniFabTitleTextColorList``` and ```app:miniFabBackgroundTintList```. Note - if you've used ```miniFabTitleTextColor``` and ```miniFabBackgroundTint``` they will be overriden by the color arrays.
+
+##### Result
+<img src="http://yavski.github.io/fab-speed-dial/sample-multi-color.gif" width="360">
+
 ##### Position
 In order to change the position of the view, use the standard android APIs to position *FabSpeedDial* within your *ViewGroup* and be sure to assign *fabGravity* a relevant value.
 
@@ -109,6 +130,9 @@ The following attribtues are supported:
 | app:fabBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the main FAB |
 | app:miniFabDrawableTint | [android:tint](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:tint) | Tints the icon drawable of the mini FAB(s) |
 | app:miniFabBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the mini FAB(s) |
+|app:miniFabBackgroundTintList | | An array containing the background colors for each of the mini FABs.
+|app:miniFabTitleTextColor| [android:textColor]  (https://developer.android.com/reference/android/widget/TextView.html#attr_android:textColor) | Sets the color of the title of the mini FAB. |
+|app:miniFabTitleTextColorList|| An array containing the colors for each of the titles of the mini FABs.
 | app:miniFabTitleBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the title(s) of the mini FAB(s) |
 | app:miniFabTitlesEnabled | | Convinience for hiding the tilte(s) of the mini FAB(s) |
 | app:touchGuard | | Hide FAB when touching out of its bounds |
