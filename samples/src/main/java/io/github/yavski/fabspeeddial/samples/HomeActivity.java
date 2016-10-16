@@ -72,12 +72,15 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                 newActivity = PositionSampleActivity.class;
                 break;
             case 1:
-                newActivity = StyleSampleActivity.class;
+                newActivity = GroupStyleSampleActivity.class;
                 break;
             case 2:
-                newActivity = EventsSampleActivity.class;
+                newActivity = IndividualStyleSampleActivity.class;
                 break;
             case 3:
+                newActivity = EventsSampleActivity.class;
+                break;
+            case 4:
                 newActivity = MenuItemsSampleActivity.class;
                 break;
         }

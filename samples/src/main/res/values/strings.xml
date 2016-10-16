@@ -28,14 +28,16 @@
 
     <string-array name="title_array">
         <item>Position</item>
-        <item>Style</item>
+        <item>Style I</item>
+        <item>Style II</item>
         <item>Click Callback</item>
         <item>Menu Items</item>
     </string-array>
 
     <string-array name="description_array">
         <item>Set fabGravity in order to position the view in your view group</item>
-        <item>Style up FAB and change the appearance of the menu items</item>
+        <item>Style up FAB and change the appearance of the menu items as a group</item>
+        <item>Style up FAB and change the appearance of the menu items individually</item>
         <item>Register a callback to receive the click events of the menu items</item>
         <item>Update dynamically the title and visibility of your menu items</item>
     </string-array>

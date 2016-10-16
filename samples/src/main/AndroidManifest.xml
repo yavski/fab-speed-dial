@@ -34,7 +34,8 @@
         </activity>
 
         <activity android:name="io.github.yavski.fabspeeddial.samples.PositionSampleActivity" />
-        <activity android:name="io.github.yavski.fabspeeddial.samples.StyleSampleActivity" />
+        <activity android:name="io.github.yavski.fabspeeddial.samples.GroupStyleSampleActivity" />
+        <activity android:name="io.github.yavski.fabspeeddial.samples.IndividualStyleSampleActivity" />
         <activity android:name="io.github.yavski.fabspeeddial.samples.EventsSampleActivity" />
         <activity android:name="io.github.yavski.fabspeeddial.samples.MenuItemsSampleActivity" />
 

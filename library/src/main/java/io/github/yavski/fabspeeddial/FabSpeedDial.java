@@ -122,12 +122,13 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private ColorStateList miniFabTitleBackgroundTint;
     private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
+    private int[] miniFabTitleTextColorArray;
     private Drawable touchGuardDrawable;
     private boolean useTouchGuard;
 
     private boolean isAnimating;
 
-    //Variable to hold wheter the menu was open or not on config change
+    // Variable to hold whether the menu was open or not on config change
     private boolean shouldOpenMenu;
 
     private FabSpeedDial(Context context) {
@@ -206,11 +207,11 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             miniFabBackgroundTint = getColorStateList(R.color.fab_background_tint);
         }
 
-        if(typedArray.hasValue(R.styleable.FabSpeedDial_miniFabBackgroundTintList)) {
-            int miniFabBackgroundTintListMenuId = typedArray.getResourceId(R.styleable.FabSpeedDial_miniFabBackgroundTintList, 0);
-            TypedArray miniFabBackgroundTintRes = getResources().obtainTypedArray(miniFabBackgroundTintListMenuId);
+        if (typedArray.hasValue(R.styleable.FabSpeedDial_miniFabBackgroundTintList)) {
+            int miniFabBackgroundTintListId = typedArray.getResourceId(R.styleable.FabSpeedDial_miniFabBackgroundTintList, 0);
+            TypedArray miniFabBackgroundTintRes = getResources().obtainTypedArray(miniFabBackgroundTintListId);
             miniFabBackgroundTintArray = new int[miniFabBackgroundTintRes.length()];
-            for(int i = 0; i < miniFabBackgroundTintRes.length(); i++){
+            for (int i = 0; i < miniFabBackgroundTintRes.length(); i++) {
                 miniFabBackgroundTintArray[i] = miniFabBackgroundTintRes.getResourceId(i, 0);
             }
             miniFabBackgroundTintRes.recycle();
@@ -231,6 +232,16 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
         miniFabTitleTextColor = typedArray.getColor(R.styleable.FabSpeedDial_miniFabTitleTextColor,
                 ContextCompat.getColor(getContext(), R.color.title_text_color));
+
+        if (typedArray.hasValue(R.styleable.FabSpeedDial_miniFabTitleTextColorList)) {
+            int miniFabTitleTextColorListId = typedArray.getResourceId(R.styleable.FabSpeedDial_miniFabTitleTextColorList, 0);
+            TypedArray miniFabTitleTextColorTa = getResources().obtainTypedArray(miniFabTitleTextColorListId);
+            miniFabTitleTextColorArray = new int[miniFabTitleTextColorTa.length()];
+            for (int i = 0; i < miniFabTitleTextColorTa.length(); i++) {
+                miniFabTitleTextColorArray[i] = miniFabTitleTextColorTa.getResourceId(i, 0);
+            }
+            miniFabTitleTextColorTa.recycle();
+        }
 
         touchGuardDrawable = typedArray.getDrawable(R.styleable.FabSpeedDial_touchGuardDrawable);
 
@@ -311,7 +322,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
         setOnClickListener(this);
 
-        if(shouldOpenMenu)
+        if (shouldOpenMenu)
             openMenu();
     }
 
@@ -361,7 +372,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        if(!(state instanceof SavedState)){
+        if (!(state instanceof SavedState)) {
             super.onRestoreInstanceState(state);
             return;
         }
@@ -463,13 +474,18 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             titleView.setText(title);
             titleView.setTypeface(null, Typeface.BOLD);
             titleView.setTextColor(miniFabTitleTextColor);
+
+            if (miniFabTitleTextColorArray != null) {
+                titleView.setTextColor(ContextCompat.getColorStateList(getContext(),
+                        miniFabTitleTextColorArray[menuItem.getOrder()]));
+            }
         } else {
             fabMenuItem.removeView(cardView);
         }
 
         miniFab.setBackgroundTintList(miniFabBackgroundTint);
 
-        if(miniFabBackgroundTintArray != null){
+        if (miniFabBackgroundTintArray != null) {
             miniFab.setBackgroundTintList(ContextCompat.getColorStateList(getContext(),
                     miniFabBackgroundTintArray[menuItem.getOrder()]));
         }
