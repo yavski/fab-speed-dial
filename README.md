@@ -106,20 +106,20 @@ Define an integer-array resource that contains the colors you want to use in the
 
 Make sure you also assign [android:orderInCategory](https://developer.android.com/guide/topics/resources/menu-resource.html) to each menu item in your menu.xml in the same 0-based order.
 
-To provide the color array to the menu items use the following attributes: ```app:miniFabTitleTextColorList``` and ```app:miniFabBackgroundTintList```. Note - if you've used ```miniFabTitleTextColor``` and ```miniFabBackgroundTint``` they will be overriden by the color arrays.
+To provide the color array to the menu items use the following attributes: ```miniFabTitleTextColorList``` and ```miniFabBackgroundTintList```. Note - if you've used ```miniFabTitleTextColor``` and ```miniFabBackgroundTint``` they will be overriden by the color arrays.
 
 ##### Result
 <img src="http://yavski.github.io/fab-speed-dial/sample-multi-color.gif" width="360">
 
 ##### Position
-In order to change the position of the view, use the standard android APIs to position *FabSpeedDial* within your *ViewGroup* and be sure to assign *fabGravity* a relevant value.
+In order to change the position of the view, use the standard android APIs to position *FabSpeedDial* within your *ViewGroup* and be sure to assign ```fabGravity``` a relevant value.
 
 <img src="http://yavski.github.io/fab-speed-dial/sample-03.png" width="292">
 <img src="http://yavski.github.io/fab-speed-dial/sample-04.png" width="292">
 <img src="http://yavski.github.io/fab-speed-dial/sample-02.png" width="292">
 
 ##### Basic styling
-As a rule of thumb, attributes prepended with *fab*, i.e. *fabDrawable*, refer to the normsal-sized FAB view; attribtues prepended with *miniFab* refer to the mini-sized FAB views in the list.
+As a rule of thumb, attributes prepended with *fab*, i.e. ```fabDrawable```, refer to the normsal-sized FAB view; attribtues prepended with *miniFab* refer to the mini-sized FAB views in the list.
 
 The following attribtues are supported:
 
