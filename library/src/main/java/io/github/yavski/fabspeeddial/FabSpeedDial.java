@@ -426,6 +426,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     public void show() {
         if (!ViewCompat.isAttachedToWindow(this))
             return;
+        setVisibility(View.VISIBLE);
         fab.show();
     }
 
