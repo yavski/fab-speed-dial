@@ -30,6 +30,8 @@
         <attr name="fabDrawable" format="color|reference" />
         <attr name="fabDrawableTint" format="color|reference" />
         <attr name="fabBackgroundTint" format="color|reference" />
+        <attr name="fabTopMargin" format="dimension|reference" />
+        <attr name="fabBottomMargin" format="dimension|reference" />
 
         <attr name="miniFabBackgroundTint" format="color|reference" />
         <attr name="miniFabBackgroundTintList" format="reference" />

@@ -117,6 +117,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private Drawable fabDrawable;
     private ColorStateList fabDrawableTint;
     private ColorStateList fabBackgroundTint;
+    private float fabTopMargin;
+    private float fabBottomMargin;
     private ColorStateList miniFabDrawableTint;
     private ColorStateList miniFabBackgroundTint;
     private int[] miniFabBackgroundTintArray;
@@ -207,6 +209,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             fabBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_fabBackgroundTint);
         }
 
+        fabTopMargin = typedArray.getDimension(R.styleable.FabSpeedDial_fabTopMargin, getResources().getDimension(R.dimen.fab_margin));
+        fabBottomMargin = typedArray.getDimension(R.styleable.FabSpeedDial_fabBottomMargin, getResources().getDimension(R.dimen.fab_margin));
+
         miniFabBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabBackgroundTint);
         if (miniFabBackgroundTint == null) {
             miniFabBackgroundTint = getColorStateList(R.color.fab_background_tint);
@@ -291,6 +296,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         if (fabBackgroundTint != null) {
             fab.setBackgroundTintList(fabBackgroundTint);
         }
+
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) fab.getLayoutParams();
+        params.setMargins(params.leftMargin, (int)fabTopMargin, params.rightMargin, (int)fabBottomMargin);
 
         fab.setOnClickListener(new OnClickListener() {
             @Override
