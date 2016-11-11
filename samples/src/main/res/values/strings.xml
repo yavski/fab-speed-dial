@@ -32,6 +32,7 @@
         <item>Style II</item>
         <item>Click Callback</item>
         <item>Menu Items</item>
+        <item>Customization</item>
     </string-array>
 
     <string-array name="description_array">
@@ -40,6 +41,7 @@
         <item>Style up FAB and change the appearance of the menu items individually</item>
         <item>Register a callback to receive the click events of the menu items</item>
         <item>Update dynamically the title and visibility of your menu items</item>
+        <item>Customize additional FAB/menu item appearance properties</item>
     </string-array>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, utamur efficiantur no vim, mei iisque appetere electram ex. Cu eam tamquam commune intellegebat, id pri nibh vidisse. Has at dolore legendos, ei erant quaeque mnesarchum mei. Amet mediocritatem est et. Nam eu nisl dolor dolorum, ei omnium honestatis est. Nullam denique mei no, et vim brute scaevola sententiae, vero commune id cum.\n\nQuod rationibus has cu, eu sed dicta clita oblique, pro cu tibique consectetuer. Vix at everti vivendum scriptorem, ne eam utinam iracundia. Sumo affert regione ea sea, an integre utroque nam. Te duo alia dicam, inani reformidans sed no. Mel et tation nullam.\n\nTota periculis mea ut, cum ad meliore urbanitas. No per suas facer liberavisse. Eam ullum tritani instructior ea, at qui omnium noluisse, ei nec modus commune mediocrem. Quot admodum qui ex, ei tempor atomorum eam, et vel impetus alienum. Has eros nullam tritani eu, cum ea laoreet iudicabit dissentiet, ea est assum voluptatibus comprehensam. Sed graece volumus consulatu id, ei sonet urbanitas nam.</string>
