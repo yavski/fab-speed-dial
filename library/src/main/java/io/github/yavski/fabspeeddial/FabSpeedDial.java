@@ -123,6 +123,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
     private int[] miniFabTitleTextColorArray;
+    private float miniFabTitleElevation;
     private Drawable touchGuardDrawable;
     private boolean useTouchGuard;
 
@@ -242,6 +243,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             }
             miniFabTitleTextColorTa.recycle();
         }
+
+        miniFabTitleElevation = typedArray.getDimension(R.styleable.FabSpeedDial_miniFabTitleElevation,
+                                                        getResources().getDimension(R.dimen.mini_fab_label_elevation));
 
         touchGuardDrawable = typedArray.getDrawable(R.styleable.FabSpeedDial_touchGuardDrawable);
 
@@ -465,6 +469,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         miniFab.setImageDrawable(menuItem.getIcon());
         miniFab.setOnClickListener(this);
         cardView.setOnClickListener(this);
+
+        cardView.setCardElevation(miniFabTitleElevation);
 
         ViewCompat.setAlpha(miniFab, 0f);
         ViewCompat.setAlpha(cardView, 0f);
