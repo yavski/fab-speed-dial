@@ -40,6 +40,7 @@ import android.text.TextUtils;
 import android.util.AndroidRuntimeException;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -123,6 +124,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
     private int[] miniFabTitleTextColorArray;
+    private Typeface miniFabTitleTypeface;
+    private int miniFabTitleTypefaceStyle;
+    private float miniFabTitleTextSize;
     private float miniFabTitleElevation;
     private Drawable touchGuardDrawable;
     private boolean useTouchGuard;
@@ -243,6 +247,18 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             }
             miniFabTitleTextColorTa.recycle();
         }
+
+        String typefaceName = typedArray.getString(R.styleable.FabSpeedDial_miniFabTitleTypefaceName);
+
+        if (typefaceName != null)
+            miniFabTitleTypeface = Typeface.createFromAsset(getContext().getAssets(), typefaceName);
+        else
+            miniFabTitleTypeface = Typeface.create("sans", Typeface.NORMAL);
+
+        miniFabTitleTypefaceStyle = typedArray.getInt(R.styleable.FabSpeedDial_miniFabTitleTypefaceStyle, Typeface.BOLD);
+
+        miniFabTitleTextSize = typedArray.getDimension(R.styleable.FabSpeedDial_miniFabTitleTextSize,
+                                                       getResources().getDimension(R.dimen.mini_fab_label_text_size));
 
         miniFabTitleElevation = typedArray.getDimension(R.styleable.FabSpeedDial_miniFabTitleElevation,
                                                         getResources().getDimension(R.dimen.mini_fab_label_elevation));
@@ -479,8 +495,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         if (!TextUtils.isEmpty(title) && miniFabTitlesEnabled) {
             cardView.setCardBackgroundColor(miniFabTitleBackgroundTint.getDefaultColor());
             titleView.setText(title);
-            titleView.setTypeface(null, Typeface.BOLD);
+            titleView.setTypeface(miniFabTitleTypeface, miniFabTitleTypefaceStyle);
             titleView.setTextColor(miniFabTitleTextColor);
+            titleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, miniFabTitleTextSize);
 
             if (miniFabTitleTextColorArray != null) {
                 titleView.setTextColor(ContextCompat.getColorStateList(getContext(),

@@ -32,6 +32,7 @@
     <dimen name="mini_fab_margin_right">@dimen/keyline_1_minus_8dp</dimen>
     <dimen name="mini_fab_margin_bottom">0dp</dimen>
 
+    <dimen name="mini_fab_label_text_size">12sp</dimen>
     <dimen name="mini_fab_label_elevation">4dp</dimen>
 
 </resources>

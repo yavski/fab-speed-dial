@@ -36,6 +36,13 @@
         <attr name="miniFabDrawableTint" format="color|reference" />
         <attr name="miniFabTitleTextColor" format="color|reference" />
         <attr name="miniFabTitleTextColorList" format="reference" />
+        <attr name="miniFabTitleTypefaceName" format="string|reference" />
+        <attr name="miniFabTitleTextSize" format="dimension|reference" />
+        <attr name="miniFabTitleTypefaceStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
         <attr name="miniFabTitleElevation" format="dimension|reference" />
 
         <attr name="touchGuard" format="boolean" />
