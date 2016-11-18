@@ -209,8 +209,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             fabBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_fabBackgroundTint);
         }
 
-        fabTopMargin = typedArray.getDimension(R.styleable.FabSpeedDial_fabTopMargin, getResources().getDimension(R.dimen.fab_margin));
-        fabBottomMargin = typedArray.getDimension(R.styleable.FabSpeedDial_fabBottomMargin, getResources().getDimension(R.dimen.fab_margin));
+        fabTopMargin = typedArray.getDimension(R.styleable.FabSpeedDial_fabTopMargin, getResources().getDimension(R.dimen.fab_speed_dial_fab_margin));
+        fabBottomMargin = typedArray.getDimension(R.styleable.FabSpeedDial_fabBottomMargin, getResources().getDimension(R.dimen.fab_speed_dial_fab_margin));
 
         miniFabBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabBackgroundTint);
         if (miniFabBackgroundTint == null) {
@@ -263,10 +263,10 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         miniFabTitleTypefaceStyle = typedArray.getInt(R.styleable.FabSpeedDial_miniFabTitleTypefaceStyle, Typeface.BOLD);
 
         miniFabTitleTextSize = typedArray.getDimension(R.styleable.FabSpeedDial_miniFabTitleTextSize,
-                                                       getResources().getDimension(R.dimen.mini_fab_label_text_size));
+                                                       getResources().getDimension(R.dimen.fab_speed_dial_mini_fab_label_text_size));
 
         miniFabTitleElevation = typedArray.getDimension(R.styleable.FabSpeedDial_miniFabTitleElevation,
-                                                        getResources().getDimension(R.dimen.mini_fab_label_elevation));
+                                                        getResources().getDimension(R.dimen.fab_speed_dial_mini_fab_label_elevation));
 
         touchGuardDrawable = typedArray.getDrawable(R.styleable.FabSpeedDial_touchGuardDrawable);
 
@@ -279,7 +279,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
         LayoutParams layoutParams =
                 new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        int coordinatorLayoutOffset = getResources().getDimensionPixelSize(R.dimen.coordinator_layout_offset);
+        int coordinatorLayoutOffset = getResources().getDimensionPixelSize(R.dimen.fab_speed_dial_coordinator_layout_offset);
         if (fabGravity == BOTTOM_END || fabGravity == TOP_END) {
             layoutParams.setMargins(0, 0, coordinatorLayoutOffset, 0);
         } else {
@@ -580,7 +580,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     }
 
     private void animateViewIn(final View view, int position) {
-        final float offsetY = getResources().getDimensionPixelSize(R.dimen.keyline_1);
+        final float offsetY = getResources().getDimensionPixelSize(R.dimen.fab_speed_dial_keyline_1);
 
         ViewCompat.setScaleX(view, 0.25f);
         ViewCompat.setScaleY(view, 0.25f);

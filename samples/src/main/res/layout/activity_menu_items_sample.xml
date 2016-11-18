@@ -60,13 +60,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/keyline_1"
+            android:layout_marginTop="@dimen/fab_speed_dial_keyline_1"
             android:text="@string/visibility" />
 
         <FrameLayout
             style="@style/SwitchContainer"
             android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+            android:layout_marginTop="@dimen/fab_speed_dial_keyline_1_minus_8dp"
             android:layout_height="wrap_content">
 
             <TextView
