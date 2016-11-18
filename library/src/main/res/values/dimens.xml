@@ -23,7 +23,7 @@
     <dimen name="fab_menu_item_margin_top">-16dp</dimen>
     <!-- CoordinatorLayout adds to the margins of the FAB, official bug: 'Issue 176096:
     Using CoordinatorLayout view anchors will cause margins to be ignored' -->
-    <dimen name="coordinator_layout_offset">12dp</dimen>
+    <dimen name="coordinator_layout_offset">0dp</dimen>
     <!-- Needed as another side effect of the bug above -->
     <dimen name="fab_margin">0dp</dimen>
     <!-- Needed in order to align vertically the fabs -->
