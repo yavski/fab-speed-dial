@@ -27,7 +27,13 @@
     Using CoordinatorLayout view anchors will cause margins to be ignored' -->
     <dimen name="coordinator_layout_offset">0dp</dimen>
 
+    <!-- Needed because Android adds extra padding to the FAB automatically for pre-Lollipop devices in order to make
+    the elevation shadow appear correctly. In order to ensure pre-Lollipop and Lollipop+ devices appear the same, use 0dp
+    here, and 16dp in v21 dimens file.  This could be worked around by using useCompatPadding="true" in all the FABs, but
+    that is only available in later support libraries, and applications using this library may not be using a newer
+    version. -->
     <dimen name="fab_margin">0dp</dimen>
+
     <!-- Needed in order to align vertically the fabs -->
     <dimen name="mini_fab_margin_left">@dimen/keyline_1_minus_8dp</dimen>
     <dimen name="mini_fab_margin_top">0dp</dimen>
