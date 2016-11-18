@@ -16,7 +16,10 @@
   -->
 
 <resources>
-    <dimen name="fab_menu_item_margin_top">0dp</dimen>
+    <!-- Needed as the impl of CardView in pre-Lollipop unnecessarily adds 16 dp to the top and bottom.  Use 0dp here since
+    Lollipop+ devices are not affected by this issue. -->
+    <dimen name="fab_menu_item_margin_top_bottom">0dp</dimen>
+
     <dimen name="coordinator_layout_offset">@dimen/keyline_1</dimen>
 
     <dimen name="fab_margin">@dimen/keyline_1</dimen>

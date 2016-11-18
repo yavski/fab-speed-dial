@@ -17,8 +17,8 @@
 <resources>
 
     <style name="MiniFabLayout">
-        <item name="android:layout_gravity">end</item>
-        <item name="android:layout_marginTop">@dimen/fab_menu_item_margin_top</item>
+        <item name="android:layout_marginTop">@dimen/fab_menu_item_margin_top_bottom</item>
+        <item name="android:layout_marginBottom">@dimen/fab_menu_item_margin_top_bottom</item>
         <item name="android:orientation">horizontal</item>
     </style>
 

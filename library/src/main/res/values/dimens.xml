@@ -19,12 +19,14 @@
     <dimen name="keyline_1">16dp</dimen>
     <dimen name="keyline_1_minus_8dp">8dp</dimen>
 
-    <!-- Needed as the impl of CardView in pre-Lollipop unnecessarily adds 16 dp to the top and bottom -->
-    <dimen name="fab_menu_item_margin_top">-16dp</dimen>
+    <!-- Needed as the impl of CardView in pre-Lollipop unnecessarily adds 16 dp to the top and bottom.  Using -8dp on top
+    and -8dp on bottom of card layouts result in tigher packed, evenly spaced controls -->
+    <dimen name="fab_menu_item_margin_top_bottom">-8dp</dimen>
+
     <!-- CoordinatorLayout adds to the margins of the FAB, official bug: 'Issue 176096:
     Using CoordinatorLayout view anchors will cause margins to be ignored' -->
     <dimen name="coordinator_layout_offset">0dp</dimen>
-    <!-- Needed as another side effect of the bug above -->
+
     <dimen name="fab_margin">0dp</dimen>
     <!-- Needed in order to align vertically the fabs -->
     <dimen name="mini_fab_margin_left">@dimen/keyline_1_minus_8dp</dimen>
