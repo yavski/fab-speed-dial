@@ -38,6 +38,7 @@
         <activity android:name="io.github.yavski.fabspeeddial.samples.IndividualStyleSampleActivity" />
         <activity android:name="io.github.yavski.fabspeeddial.samples.EventsSampleActivity" />
         <activity android:name="io.github.yavski.fabspeeddial.samples.MenuItemsSampleActivity" />
+        <activity android:name="io.github.yavski.fabspeeddial.samples.CustomizationSampleActivity" />
 
     </application>
 

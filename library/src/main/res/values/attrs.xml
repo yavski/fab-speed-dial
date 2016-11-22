@@ -30,12 +30,22 @@
         <attr name="fabDrawable" format="color|reference" />
         <attr name="fabDrawableTint" format="color|reference" />
         <attr name="fabBackgroundTint" format="color|reference" />
+        <attr name="fabTopMargin" format="dimension|reference" />
+        <attr name="fabBottomMargin" format="dimension|reference" />
 
         <attr name="miniFabBackgroundTint" format="color|reference" />
         <attr name="miniFabBackgroundTintList" format="reference" />
         <attr name="miniFabDrawableTint" format="color|reference" />
         <attr name="miniFabTitleTextColor" format="color|reference" />
         <attr name="miniFabTitleTextColorList" format="reference" />
+        <attr name="miniFabTitleTypefaceName" format="string|reference" />
+        <attr name="miniFabTitleTextSize" format="dimension|reference" />
+        <attr name="miniFabTitleTypefaceStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
+        <attr name="miniFabTitleElevation" format="dimension|reference" />
 
         <attr name="touchGuard" format="boolean" />
         <attr name="touchGuardDrawable" format="color|reference" />

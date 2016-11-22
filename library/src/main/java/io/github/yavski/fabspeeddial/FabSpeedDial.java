@@ -40,6 +40,7 @@ import android.text.TextUtils;
 import android.util.AndroidRuntimeException;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -116,6 +117,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private Drawable fabDrawable;
     private ColorStateList fabDrawableTint;
     private ColorStateList fabBackgroundTint;
+    private float fabTopMargin;
+    private float fabBottomMargin;
     private ColorStateList miniFabDrawableTint;
     private ColorStateList miniFabBackgroundTint;
     private int[] miniFabBackgroundTintArray;
@@ -123,6 +126,10 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
     private int[] miniFabTitleTextColorArray;
+    private Typeface miniFabTitleTypeface;
+    private int miniFabTitleTypefaceStyle;
+    private float miniFabTitleTextSize;
+    private float miniFabTitleElevation;
     private Drawable touchGuardDrawable;
     private boolean useTouchGuard;
 
@@ -202,6 +209,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             fabBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_fabBackgroundTint);
         }
 
+        fabTopMargin = typedArray.getDimension(R.styleable.FabSpeedDial_fabTopMargin, getResources().getDimension(R.dimen.fab_speed_dial_fab_margin));
+        fabBottomMargin = typedArray.getDimension(R.styleable.FabSpeedDial_fabBottomMargin, getResources().getDimension(R.dimen.fab_speed_dial_fab_margin));
+
         miniFabBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabBackgroundTint);
         if (miniFabBackgroundTint == null) {
             miniFabBackgroundTint = getColorStateList(R.color.fab_background_tint);
@@ -243,6 +253,21 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             miniFabTitleTextColorTa.recycle();
         }
 
+        String typefaceName = typedArray.getString(R.styleable.FabSpeedDial_miniFabTitleTypefaceName);
+
+        if (typefaceName != null)
+            miniFabTitleTypeface = Typeface.createFromAsset(getContext().getAssets(), typefaceName);
+        else
+            miniFabTitleTypeface = Typeface.create("sans", Typeface.NORMAL);
+
+        miniFabTitleTypefaceStyle = typedArray.getInt(R.styleable.FabSpeedDial_miniFabTitleTypefaceStyle, Typeface.BOLD);
+
+        miniFabTitleTextSize = typedArray.getDimension(R.styleable.FabSpeedDial_miniFabTitleTextSize,
+                                                       getResources().getDimension(R.dimen.fab_speed_dial_mini_fab_label_text_size));
+
+        miniFabTitleElevation = typedArray.getDimension(R.styleable.FabSpeedDial_miniFabTitleElevation,
+                                                        getResources().getDimension(R.dimen.fab_speed_dial_mini_fab_label_elevation));
+
         touchGuardDrawable = typedArray.getDrawable(R.styleable.FabSpeedDial_touchGuardDrawable);
 
         useTouchGuard = typedArray.getBoolean(R.styleable.FabSpeedDial_touchGuard, true);
@@ -254,7 +279,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
         LayoutParams layoutParams =
                 new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        int coordinatorLayoutOffset = getResources().getDimensionPixelSize(R.dimen.coordinator_layout_offset);
+        int coordinatorLayoutOffset = getResources().getDimensionPixelSize(R.dimen.fab_speed_dial_coordinator_layout_offset);
         if (fabGravity == BOTTOM_END || fabGravity == TOP_END) {
             layoutParams.setMargins(0, 0, coordinatorLayoutOffset, 0);
         } else {
@@ -271,6 +296,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         if (fabBackgroundTint != null) {
             fab.setBackgroundTintList(fabBackgroundTint);
         }
+
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) fab.getLayoutParams();
+        params.setMargins(params.leftMargin, (int)fabTopMargin, params.rightMargin, (int)fabBottomMargin);
 
         fab.setOnClickListener(new OnClickListener() {
             @Override
@@ -469,6 +497,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         miniFab.setOnClickListener(this);
         cardView.setOnClickListener(this);
 
+        cardView.setCardElevation(miniFabTitleElevation);
+
         ViewCompat.setAlpha(miniFab, 0f);
         ViewCompat.setAlpha(cardView, 0f);
 
@@ -476,8 +506,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         if (!TextUtils.isEmpty(title) && miniFabTitlesEnabled) {
             cardView.setCardBackgroundColor(miniFabTitleBackgroundTint.getDefaultColor());
             titleView.setText(title);
-            titleView.setTypeface(null, Typeface.BOLD);
+            titleView.setTypeface(miniFabTitleTypeface, miniFabTitleTypefaceStyle);
             titleView.setTextColor(miniFabTitleTextColor);
+            titleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, miniFabTitleTextSize);
 
             if (miniFabTitleTextColorArray != null) {
                 titleView.setTextColor(ContextCompat.getColorStateList(getContext(),
@@ -552,7 +583,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     }
 
     private void animateViewIn(final View view, int position) {
-        final float offsetY = getResources().getDimensionPixelSize(R.dimen.keyline_1);
+        final float offsetY = getResources().getDimensionPixelSize(R.dimen.fab_speed_dial_keyline_1);
 
         ViewCompat.setScaleX(view, 0.25f);
         ViewCompat.setScaleY(view, 0.25f);

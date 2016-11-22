@@ -16,13 +16,22 @@
   -->
 
 <resources>
-    <dimen name="fab_menu_item_margin_top">0dp</dimen>
-    <dimen name="coordinator_layout_offset">@dimen/keyline_1</dimen>
+    <!-- Needed as the impl of CardView in pre-Lollipop unnecessarily adds 16 dp to the top and bottom.  Use 0dp here since
+    Lollipop+ devices are not affected by this issue. -->
+    <dimen name="fab_speed_dial_fab_menu_item_margin_top_bottom">0dp</dimen>
 
-    <dimen name="fab_margin">@dimen/keyline_1</dimen>
-    <dimen name="mini_fab_margin_left">@dimen/keyline_1_minus_8dp</dimen>
-    <dimen name="mini_fab_margin_top">@dimen/keyline_1_minus_8dp</dimen>
-    <dimen name="mini_fab_margin_right">@dimen/keyline_1_minus_8dp</dimen>
-    <dimen name="mini_fab_margin_bottom">@dimen/keyline_1_minus_8dp</dimen>
+    <dimen name="fab_speed_dial_coordinator_layout_offset">@dimen/fab_speed_dial_keyline_1</dimen>
+
+    <!-- Needed because Android adds extra padding to the FAB automatically for pre-Lollipop devices in order to make
+    the elevation shadow appear correctly. In order to ensure pre-Lollipop and Lollipop+ devices appear the same, use 16dp
+    here, and 0dp in regular dimens file.  This could be worked around by using useCompatPadding="true" in all the FABs, but
+    that is only available in later support libraries, and applications using this library may not be using a newer
+    version. -->
+    <dimen name="fab_speed_dial_fab_margin">@dimen/fab_speed_dial_keyline_1</dimen>
+
+    <dimen name="fab_speed_dial_mini_fab_margin_left">@dimen/fab_speed_dial_keyline_1_minus_8dp</dimen>
+    <dimen name="fab_speed_dial_mini_fab_margin_top">@dimen/fab_speed_dial_keyline_1_minus_8dp</dimen>
+    <dimen name="fab_speed_dial_mini_fab_margin_right">@dimen/fab_speed_dial_keyline_1_minus_8dp</dimen>
+    <dimen name="fab_speed_dial_mini_fab_margin_bottom">@dimen/fab_speed_dial_keyline_1_minus_8dp</dimen>
 
 </resources>

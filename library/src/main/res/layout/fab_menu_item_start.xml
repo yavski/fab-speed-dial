@@ -15,11 +15,10 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MiniFabLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="start"
-    android:layout_marginTop="@dimen/fab_menu_item_margin_top"
-    android:orientation="horizontal">
+    android:layout_gravity="start">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/mini_fab"
