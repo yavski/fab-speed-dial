@@ -248,6 +248,102 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         useTouchGuard = typedArray.getBoolean(R.styleable.FabSpeedDial_touchGuard, true);
     }
 
+    public Drawable getFabDrawable() {
+        return fabDrawable;
+    }
+
+    public void setFabDrawable(Drawable fabDrawable) {
+        this.fabDrawable = fabDrawable;
+        if (fab!=null) {
+            fab.setImageDrawable(fabDrawable);
+        }
+    }
+
+    public ColorStateList getFabDrawableTint() {
+        return fabDrawableTint;
+    }
+
+    public void setFabDrawableTint(ColorStateList fabDrawableTint) {
+        this.fabDrawableTint = fabDrawableTint;
+        if (fab!=null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            fab.setImageTintList(fabDrawableTint);
+        }
+    }
+
+    public ColorStateList getFabBackgroundTint() {
+        return fabBackgroundTint;
+    }
+
+    public void setFabBackgroundTint(ColorStateList fabBackgroundTint) {
+        this.fabBackgroundTint = fabBackgroundTint;
+        if (fab!=null && fabBackgroundTint != null) {
+            fab.setBackgroundTintList(fabBackgroundTint);
+        }
+    }
+
+    public ColorStateList getMiniFabDrawableTint() {
+        return miniFabDrawableTint;
+    }
+
+    public void setMiniFabDrawableTint(ColorStateList miniFabDrawableTint) {
+        this.miniFabDrawableTint = miniFabDrawableTint;
+    }
+
+    public ColorStateList getMiniFabBackgroundTint() {
+        return miniFabBackgroundTint;
+    }
+
+    public void setMiniFabBackgroundTint(ColorStateList miniFabBackgroundTint) {
+        this.miniFabBackgroundTint = miniFabBackgroundTint;
+    }
+
+    public ColorStateList getMiniFabTitleBackgroundTint() {
+        return miniFabTitleBackgroundTint;
+    }
+
+    public void setMiniFabTitleBackgroundTint(ColorStateList miniFabTitleBackgroundTint) {
+        this.miniFabTitleBackgroundTint = miniFabTitleBackgroundTint;
+    }
+
+    public boolean isMiniFabTitlesEnabled() {
+        return miniFabTitlesEnabled;
+    }
+
+    public void setMiniFabTitlesEnabled(boolean miniFabTitlesEnabled) {
+        this.miniFabTitlesEnabled = miniFabTitlesEnabled;
+    }
+
+    public int getMiniFabTitleTextColor() {
+        return miniFabTitleTextColor;
+    }
+
+    public void setMiniFabTitleTextColor(int miniFabTitleTextColor) {
+        this.miniFabTitleTextColor = miniFabTitleTextColor;
+    }
+
+    public Drawable getTouchGuardDrawable() {
+        return touchGuardDrawable;
+    }
+
+    public void setTouchGuardDrawable(Drawable touchGuardDrawable) {
+        this.touchGuardDrawable = touchGuardDrawable;
+        if (touchGuard != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                touchGuard.setBackground(touchGuardDrawable);
+            } else {
+                touchGuard.setBackgroundDrawable(touchGuardDrawable);
+            }
+        }
+    }
+
+    public boolean isUseTouchGuard() {
+        return useTouchGuard;
+    }
+
+    public void setUseTouchGuard(boolean useTouchGuard) {
+        this.useTouchGuard = useTouchGuard;
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
