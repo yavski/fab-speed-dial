@@ -308,16 +308,22 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
                 FrameLayout frameLayout = (FrameLayout) parent;
                 frameLayout.addView(touchGuard);
                 bringToFront();
+                parent.requestLayout();
+                ((FrameLayout) parent).invalidate();
             } else if (parent instanceof CoordinatorLayout) {
                 CoordinatorLayout coordinatorLayout = (CoordinatorLayout) parent;
                 coordinatorLayout.addView(touchGuard);
                 bringToFront();
+                parent.requestLayout();
+                ((CoordinatorLayout) parent).invalidate();
             } else if (parent instanceof RelativeLayout) {
                 RelativeLayout relativeLayout = (RelativeLayout) parent;
                 relativeLayout.addView(touchGuard,
                         new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.MATCH_PARENT));
                 bringToFront();
+                parent.requestLayout();
+                ((RelativeLayout) parent).invalidate();
             } else {
                 Log.d(TAG, "touchGuard requires that the parent of this FabSpeedDialer be a FrameLayout or RelativeLayout");
             }
