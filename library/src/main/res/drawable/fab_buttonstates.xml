@@ -15,8 +15,13 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:id="@+id/pressed_state" android:drawable="@drawable/ic_add_black_48dp_09" android:state_selected="true" />
-    <item android:id="@+id/default_state" android:drawable="@drawable/ic_add_black_48dp_00" />
-
+    <item android:id="@+id/pressed_state" android:state_selected="true">
+        <rotate
+            android:drawable="@drawable/ic_add"
+            android:pivotY="50%"
+            android:pivotX="50%"
+            android:fromDegrees="45"
+            android:toDegrees="45" />
+    </item>
+    <item android:id="@+id/default_state" android:drawable="@drawable/ic_add" />
 </selector>
