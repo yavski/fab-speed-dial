@@ -125,7 +125,7 @@ The following attribtues are supported:
 
 | FabSpeedDial| Android | Desscription  |
 | ------------- |-------------|-----|
-| app:fabDrawable | [android:src](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:src) | Sets the icon drawable of the main FAB |
+| app:fabDrawable | [android:src](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:src) | Sets the icon drawable of the main FAB, also allows a statelist of AnimatedVectorDrawables and runs the animations |
 | app:fabDrawableTint | [android:tint](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:tint) | Tints the icon drawable of the main FAB |
 | app:fabBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the main FAB |
 | app:miniFabDrawableTint | [android:tint](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:tint) | Tints the icon drawable of the mini FAB(s) |

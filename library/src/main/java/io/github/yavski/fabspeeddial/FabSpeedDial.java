@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
@@ -190,7 +191,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private void resolveOptionalAttributes(TypedArray typedArray) {
         fabDrawable = typedArray.getDrawable(R.styleable.FabSpeedDial_fabDrawable);
         if (fabDrawable == null) {
-            fabDrawable = ContextCompat.getDrawable(getContext(), R.drawable.fab_add_clear_selector);
+            fabDrawable = ContextCompat.getDrawable(getContext(), R.drawable.fab_buttonstates);
+            //fabDrawable = ContextCompat.getDrawable(getContext(), R.drawable.fab_add_animated);
         }
 
         fabDrawableTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_fabDrawableTint);
@@ -263,7 +265,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         menuItemsLayout.setLayoutParams(layoutParams);
 
         // Set up the client's FAB
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fabspeeddial_fab);
         fab.setImageDrawable(fabDrawable);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             fab.setImageTintList(fabDrawableTint);
@@ -408,6 +410,10 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         if (showMenu) {
             addMenuItems();
             fab.setSelected(true);
+            Drawable fabDrawable = fab.getDrawable();
+            if(fabDrawable.getCurrent() instanceof Animatable) {
+                ((Animatable) fabDrawable.getCurrent()).start();
+            }
         } else {
             fab.setSelected(false);
         }
@@ -419,6 +425,10 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
         if (isMenuOpen()) {
             fab.setSelected(false);
+            Drawable fabDrawable = fab.getDrawable();
+            if(fabDrawable.getCurrent() instanceof Animatable) {
+                ((Animatable) fabDrawable.getCurrent()).start();
+            }
             removeFabMenuItems();
             if (menuListener != null) {
                 menuListener.onMenuClosed();
@@ -458,9 +468,9 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         ViewGroup fabMenuItem = (ViewGroup) LayoutInflater.from(getContext())
                 .inflate(getMenuItemLayoutId(), this, false);
 
-        FloatingActionButton miniFab = (FloatingActionButton) fabMenuItem.findViewById(R.id.mini_fab);
-        CardView cardView = (CardView) fabMenuItem.findViewById(R.id.card_view);
-        TextView titleView = (TextView) fabMenuItem.findViewById(R.id.title_view);
+        FloatingActionButton miniFab = (FloatingActionButton) fabMenuItem.findViewById(R.id.fabspeeddial_mini_fab);
+        CardView cardView = (CardView) fabMenuItem.findViewById(R.id.fabspeeddial_card_view);
+        TextView titleView = (TextView) fabMenuItem.findViewById(R.id.fabspeeddial_title_view);
 
         fabMenuItemMap.put(miniFab, menuItem);
         cardViewMenuItemMap.put(cardView, menuItem);
@@ -533,8 +543,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         if (isGravityBottom()) {
             for (int i = count - 1; i >= 0; i--) {
                 final View fabMenuItem = menuItemsLayout.getChildAt(i);
-                animateViewIn(fabMenuItem.findViewById(R.id.mini_fab), Math.abs(count - 1 - i));
-                View cardView = fabMenuItem.findViewById(R.id.card_view);
+                animateViewIn(fabMenuItem.findViewById(R.id.fabspeeddial_mini_fab), Math.abs(count - 1 - i));
+                View cardView = fabMenuItem.findViewById(R.id.fabspeeddial_card_view);
                 if (cardView != null) {
                     animateViewIn(cardView, Math.abs(count - 1 - i));
                 }
@@ -542,8 +552,8 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         } else {
             for (int i = 0; i < count; i++) {
                 final View fabMenuItem = menuItemsLayout.getChildAt(i);
-                animateViewIn(fabMenuItem.findViewById(R.id.mini_fab), i);
-                View cardView = fabMenuItem.findViewById(R.id.card_view);
+                animateViewIn(fabMenuItem.findViewById(R.id.fabspeeddial_mini_fab), i);
+                View cardView = fabMenuItem.findViewById(R.id.fabspeeddial_card_view);
                 if (cardView != null) {
                     animateViewIn(cardView, i);
                 }

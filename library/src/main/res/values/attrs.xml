@@ -15,7 +15,6 @@
   ~ limitations under the License.
   -->
 <resources>
-
     <declare-styleable name="FabSpeedDial">
         <!-- Compulsory attributes -->
         <attr name="fabMenu" format="reference" />
@@ -42,8 +41,5 @@
 
         <attr name="miniFabTitleBackgroundTint" format="color|reference"/>
         <attr name="miniFabTitlesEnabled" format="boolean"/>
-
-
     </declare-styleable>
-
 </resources>
