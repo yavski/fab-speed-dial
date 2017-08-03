@@ -127,8 +127,10 @@
         android:layout_gravity="bottom|end"
         app:fabGravity="bottom_end"
         app:fabMenu="@menu/menu_main"
+        app:fabScaleType="centerInside"
         app:miniFabBackgroundTint="@android:color/white"
         app:miniFabDrawableTint="?attr/colorPrimaryDark"
-        app:miniFabTitleTextColor="?attr/colorPrimaryDark" />
+        app:miniFabTitleTextColor="?attr/colorPrimaryDark"
+        app:miniFabScaleType="centerInside" />
 
 </android.support.design.widget.CoordinatorLayout>
