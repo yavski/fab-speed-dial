@@ -48,6 +48,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
+import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -114,6 +115,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private int menuId;
     private int fabGravity;
     private Drawable fabDrawable;
+    private ScaleType fabScaleType;
     private ColorStateList fabDrawableTint;
     private ColorStateList fabBackgroundTint;
     private ColorStateList miniFabDrawableTint;
@@ -123,6 +125,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
     private int[] miniFabTitleTextColorArray;
+    private ScaleType miniFabScaleType;
     private Drawable touchGuardDrawable;
     private boolean useTouchGuard;
 
@@ -130,6 +133,17 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     // Variable to hold whether the menu was open or not on config change
     private boolean shouldOpenMenu;
+
+    private static final ScaleType[] scaleTypeArray = {
+        ScaleType.MATRIX,
+        ScaleType.FIT_XY,
+        ScaleType.FIT_START,
+        ScaleType.FIT_CENTER,
+        ScaleType.FIT_END,
+        ScaleType.CENTER,
+        ScaleType.CENTER_CROP,
+        ScaleType.CENTER_INSIDE
+    };
 
     private FabSpeedDial(Context context) {
         super(context);
@@ -191,6 +205,20 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         fabDrawable = typedArray.getDrawable(R.styleable.FabSpeedDial_fabDrawable);
         if (fabDrawable == null) {
             fabDrawable = ContextCompat.getDrawable(getContext(), R.drawable.fab_add_clear_selector);
+        }
+
+        final int indexFabScaleType = typedArray.getInt(R.styleable.FabSpeedDial_fabScaleType, -1);
+        if (indexFabScaleType >= 0) {
+            fabScaleType = scaleTypeArray[indexFabScaleType];
+        } else {
+            fabScaleType = ScaleType.FIT_CENTER;
+        }
+
+        final int indexMiniFabScaleType = typedArray.getInt(R.styleable.FabSpeedDial_miniFabScaleType, -1);
+        if (indexMiniFabScaleType >= 0) {
+            miniFabScaleType = scaleTypeArray[indexMiniFabScaleType];
+        } else {
+            miniFabScaleType = ScaleType.FIT_CENTER;
         }
 
         fabDrawableTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_fabDrawableTint);
@@ -265,6 +293,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         // Set up the client's FAB
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setImageDrawable(fabDrawable);
+        fab.setScaleType(fabScaleType);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             fab.setImageTintList(fabDrawableTint);
         }
@@ -456,7 +485,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
     private View createFabMenuItem(MenuItem menuItem) {
         ViewGroup fabMenuItem = (ViewGroup) LayoutInflater.from(getContext())
-                .inflate(getMenuItemLayoutId(), this, false);
+            .inflate(getMenuItemLayoutId(), this, false);
 
         FloatingActionButton miniFab = (FloatingActionButton) fabMenuItem.findViewById(R.id.mini_fab);
         CardView cardView = (CardView) fabMenuItem.findViewById(R.id.card_view);
@@ -466,6 +495,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         cardViewMenuItemMap.put(cardView, menuItem);
 
         miniFab.setImageDrawable(menuItem.getIcon());
+        miniFab.setScaleType(miniFabScaleType);
         miniFab.setOnClickListener(this);
         cardView.setOnClickListener(this);
 
