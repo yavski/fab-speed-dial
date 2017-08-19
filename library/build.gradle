@@ -31,12 +31,13 @@ dependencies {
 task useCorrectSupportLibrary {
     def deps = rootProject.configurations.compile.allDependencies.withType(ProjectDependency)
     for ( dep in deps ) {
-    String ANDROIDSUPPORT = 'com.android.support:'
-    String name = dep.getName()
-    if (name.length() > ANDROIDSUPPORT.length()) {
-        if (name.take(ANDROIDSUPPORT.length()) == ANDROIDSUPPORT) {
-            project.ext.support = dep.getVersion.split(':')[1]
-            println project.ext.support
+        String ANDROIDSUPPORT = 'com.android.support:'
+        String name = dep.getName()
+        if (name.length() > ANDROIDSUPPORT.length()) {
+            if (name.take(ANDROIDSUPPORT.length()) == ANDROIDSUPPORT) {
+                project.ext.support = dep.getVersion.split(':')[1]
+                println project.ext.support
+            }
         }
     }
 }
