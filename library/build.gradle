@@ -29,10 +29,10 @@ dependencies {
 }
 
 task useCorrectSupportLibrary {
-    rootP = rootProject
-    confs = rootProject.configurations
-    comp = confs.compile
-    allDs = comp.allDependencies
+    def rootP = rootProject
+    def confs = rootProject.configurations
+    def comp = confs.compile
+    def allDs = comp.allDependencies
     def deps = allDs.withType(ProjectDependency)
     for ( dep in deps ) {
         String ANDROIDSUPPORT = 'com.android.support:'
