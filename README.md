@@ -68,7 +68,7 @@ As with all menus, you have a callback just before the list of actionable items 
         fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
             @Override
             public boolean onPrepareMenu(NavigationMenu navigationMenu) {
-                // TODO: Do something with yout menu items, or return false if you don't want to show them
+                // TODO: Do something with your menu items, or return false if you don't want to show them
                 return true;
             }
         });
