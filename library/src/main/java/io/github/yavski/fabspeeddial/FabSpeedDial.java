@@ -119,6 +119,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private ColorStateList miniFabDrawableTint;
     private ColorStateList miniFabBackgroundTint;
     private int[] miniFabBackgroundTintArray;
+    private int[] miniFabDrawableTintArray;
     private ColorStateList miniFabTitleBackgroundTint;
     private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
@@ -220,6 +221,19 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         miniFabDrawableTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabDrawableTint);
         if (miniFabDrawableTint == null) {
             miniFabDrawableTint = getColorStateList(R.color.mini_fab_drawable_tint);
+        }
+
+        if (typedArray.hasValue(R.styleable.FabSpeedDial_miniFabDrawableTintList)) {
+            int miniFabDrawableTintListId =
+                    typedArray.getResourceId(R.styleable.FabSpeedDial_miniFabDrawableTintList, 0);
+            TypedArray miniFabDrawableTintRes =
+                    getResources().obtainTypedArray(miniFabDrawableTintListId);
+            miniFabDrawableTintArray = new int[miniFabDrawableTintRes.length()];
+            for (int i = 0; i < miniFabDrawableTintRes.length(); i++) {
+                miniFabDrawableTintArray[i] = miniFabDrawableTintRes.getResourceId(i, 0);
+            }
+            miniFabDrawableTintRes.recycle();
+
         }
 
         miniFabTitleBackgroundTint = typedArray.getColorStateList(R.styleable.FabSpeedDial_miniFabTitleBackgroundTint);
@@ -496,6 +510,11 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             miniFab.setImageTintList(miniFabDrawableTint);
+        }
+
+        if (miniFabDrawableTintArray != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            miniFab.setImageTintList(ContextCompat.getColorStateList(getContext(),
+                    miniFabDrawableTintArray[menuItem.getOrder()]));
         }
 
         return fabMenuItem;
