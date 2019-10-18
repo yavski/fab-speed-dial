@@ -21,12 +21,12 @@ import android.support.v7.widget.Toolbar;
 
 import io.github.yavski.fabmenu.samples.R;
 
-public class StyleSampleActivity extends BaseSampleActivity {
+public class GroupStyleSampleActivity extends BaseSampleActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_style_sample);
+        setContentView(R.layout.activity_group_style_sample);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }

@@ -23,6 +23,8 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -120,10 +122,14 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     private ColorStateList miniFabTitleBackgroundTint;
     private boolean miniFabTitlesEnabled;
     private int miniFabTitleTextColor;
+    private int[] miniFabTitleTextColorArray;
     private Drawable touchGuardDrawable;
     private boolean useTouchGuard;
 
     private boolean isAnimating;
+
+    // Variable to hold whether the menu was open or not on config change
+    private boolean shouldOpenMenu;
 
     private FabSpeedDial(Context context) {
         super(context);
@@ -201,11 +207,11 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             miniFabBackgroundTint = getColorStateList(R.color.fab_background_tint);
         }
 
-        if(typedArray.hasValue(R.styleable.FabSpeedDial_miniFabBackgroundTintList)) {
-            int miniFabBackgroundTintListMenuId = typedArray.getResourceId(R.styleable.FabSpeedDial_miniFabBackgroundTintList, 0);
-            TypedArray miniFabBackgroundTintRes = getResources().obtainTypedArray(miniFabBackgroundTintListMenuId);
+        if (typedArray.hasValue(R.styleable.FabSpeedDial_miniFabBackgroundTintList)) {
+            int miniFabBackgroundTintListId = typedArray.getResourceId(R.styleable.FabSpeedDial_miniFabBackgroundTintList, 0);
+            TypedArray miniFabBackgroundTintRes = getResources().obtainTypedArray(miniFabBackgroundTintListId);
             miniFabBackgroundTintArray = new int[miniFabBackgroundTintRes.length()];
-            for(int i = 0; i < miniFabBackgroundTintRes.length(); i++){
+            for (int i = 0; i < miniFabBackgroundTintRes.length(); i++) {
                 miniFabBackgroundTintArray[i] = miniFabBackgroundTintRes.getResourceId(i, 0);
             }
             miniFabBackgroundTintRes.recycle();
@@ -226,6 +232,16 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
         miniFabTitleTextColor = typedArray.getColor(R.styleable.FabSpeedDial_miniFabTitleTextColor,
                 ContextCompat.getColor(getContext(), R.color.title_text_color));
+
+        if (typedArray.hasValue(R.styleable.FabSpeedDial_miniFabTitleTextColorList)) {
+            int miniFabTitleTextColorListId = typedArray.getResourceId(R.styleable.FabSpeedDial_miniFabTitleTextColorList, 0);
+            TypedArray miniFabTitleTextColorTa = getResources().obtainTypedArray(miniFabTitleTextColorListId);
+            miniFabTitleTextColorArray = new int[miniFabTitleTextColorTa.length()];
+            for (int i = 0; i < miniFabTitleTextColorTa.length(); i++) {
+                miniFabTitleTextColorArray[i] = miniFabTitleTextColorTa.getResourceId(i, 0);
+            }
+            miniFabTitleTextColorTa.recycle();
+        }
 
         touchGuardDrawable = typedArray.getDrawable(R.styleable.FabSpeedDial_touchGuardDrawable);
 
@@ -290,21 +306,27 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
 
             if (parent instanceof FrameLayout) {
                 FrameLayout frameLayout = (FrameLayout) parent;
-                frameLayout.addView(touchGuard, frameLayout.indexOfChild(this));
+                frameLayout.addView(touchGuard);
+                bringToFront();
             } else if (parent instanceof CoordinatorLayout) {
                 CoordinatorLayout coordinatorLayout = (CoordinatorLayout) parent;
-                coordinatorLayout.addView(touchGuard, coordinatorLayout.indexOfChild(this));
+                coordinatorLayout.addView(touchGuard);
+                bringToFront();
             } else if (parent instanceof RelativeLayout) {
-                ((RelativeLayout) parent).addView(
-                        touchGuard, ((RelativeLayout) parent).indexOfChild(this),
+                RelativeLayout relativeLayout = (RelativeLayout) parent;
+                relativeLayout.addView(touchGuard,
                         new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.MATCH_PARENT));
+                bringToFront();
             } else {
                 Log.d(TAG, "touchGuard requires that the parent of this FabSpeedDialer be a FrameLayout or RelativeLayout");
             }
         }
 
         setOnClickListener(this);
+
+        if (shouldOpenMenu)
+            openMenu();
     }
 
     private void newNavigationMenu() {
@@ -339,6 +361,29 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         } else {
             Log.d(TAG, "You haven't provided a MenuListener.");
         }
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState ss = new SavedState(superState);
+
+        ss.isShowingMenu = isMenuOpen();
+
+        return ss;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+
+        this.shouldOpenMenu = ss.isShowingMenu;
     }
 
     public void setMenuListener(MenuListener menuListener) {
@@ -384,6 +429,7 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
     public void show() {
         if (!ViewCompat.isAttachedToWindow(this))
             return;
+        setVisibility(View.VISIBLE);
         fab.show();
     }
 
@@ -432,13 +478,18 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
             titleView.setText(title);
             titleView.setTypeface(null, Typeface.BOLD);
             titleView.setTextColor(miniFabTitleTextColor);
+
+            if (miniFabTitleTextColorArray != null) {
+                titleView.setTextColor(ContextCompat.getColorStateList(getContext(),
+                        miniFabTitleTextColorArray[menuItem.getOrder()]));
+            }
         } else {
             fabMenuItem.removeView(cardView);
         }
 
         miniFab.setBackgroundTintList(miniFabBackgroundTint);
 
-        if(miniFabBackgroundTintArray != null){
+        if (miniFabBackgroundTintArray != null) {
             miniFab.setBackgroundTintList(ContextCompat.getColorStateList(getContext(),
                     miniFabBackgroundTintArray[menuItem.getOrder()]));
         }
@@ -572,6 +623,39 @@ public class FabSpeedDial extends LinearLayout implements View.OnClickListener {
         }
 
         return super.dispatchKeyEventPreIme(event);
+    }
+
+    static class SavedState extends BaseSavedState {
+
+        boolean isShowingMenu;
+
+        public SavedState(Parcel source) {
+            super(source);
+            this.isShowingMenu = source.readInt() == 1;
+        }
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeInt(this.isShowingMenu ? 1 : 0);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR = new Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel parcel) {
+                return new SavedState(parcel);
+            }
+
+            @Override
+            public SavedState[] newArray(int i) {
+                return new SavedState[i];
+            }
+        };
+
     }
 
 }

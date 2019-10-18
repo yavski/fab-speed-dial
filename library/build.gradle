@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 23
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 8
+        versionName "1.0.7"
     }
     buildTypes {
         release {
@@ -32,7 +32,7 @@ publish {
     userOrg = 'yavski'
     groupId = 'io.github.yavski'
     artifactId = 'fab-speed-dial'
-    publishVersion = '1.0.4'
+    publishVersion = '1.0.7'
 }
 
 // apply from: './maven.gradle'

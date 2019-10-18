@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="fab_menu_item_colors">
+        <item>@color/holo_red_dark</item>
+        <item>@color/holo_purple</item>
+        <item>@color/holo_green_light</item>
+    </integer-array>
+</resources>

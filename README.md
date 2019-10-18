@@ -1,33 +1,3 @@
-### Multi-color fab-speed-dial
-
-This is a fork of yavski's fab-speed-dial.
-
-I needed multi-color fabs like the ones you see in the Google Inbox app, so I added the feature.
-
-Until yavski adds this to his repo, or until I add this to maven, you'll need to download this repo and add it as a module in your Android Studio project if you want the multi-color feature.
-
-#### Usage
-Just like the usage of the original, in addition, you need to define an integer-array resource that contains the colors you want to use in the order of the items you want colored
-
-```
-<integer-array name="fab_menu_item_colors">
-        <item>@android:color/holo_green_light</item>
-        <item>@android:color/holo_blue_dark</item>
-        <item>@android:color/holo_purple</item>
-        <item>@android:color/holo_green_dark</item>
-        <item>@android:color/holo_red_dark</item>
-</integer-array>
-```
-Then provide the new xml attribute `app:miniFabBackgroundTintList` a reference to your array resource.
-
-Example: `app:miniFabBackgroundTintList="@array/fab_menu_colors"`
-
-##### Result
-<img src="example.png" height=350>
-
----
-
-## Original Readme
 ### fab-speed-dial
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-fab--speed--dial-green.svg?style=true)](https://android-arsenal.com/details/1/3062) [![Android Gems](http://www.android-gems.com/badge/yavski/fab-speed-dial.svg?branch=master)](http://www.android-gems.com/lib/yavski/fab-speed-dial)
@@ -41,7 +11,7 @@ Similarly tо [NavigationView] (http://developer.android.com/reference/android/s
 ##### Add the dependency to gradle.build
 ```
 dependencies {
-    compile 'io.github.yavski:fab-speed-dial:1.0.4'
+    compile 'io.github.yavski:fab-speed-dial:1.0.6'
 }
 ```
 
@@ -87,6 +57,8 @@ dependencies {
 ##### Result
 <img src="http://yavski.github.io/fab-speed-dial/sample-01.gif" width="360">
 
+In order to save the menu open/closed state, **you must define an id to the FabSpeedDial**, otherwise if you rotate the device the state won't be persisted.
+
 ##### Events
 
 As with all menus, you have a callback just before the list of actionable items are presented. The callback allows you to update your menu items, or not show the menu altogether.
@@ -118,15 +90,36 @@ Similarly, in order to be notified about a selection:
 
 ### Customisation
 
+##### Multi-colored fabs
+Define an integer-array resource that contains the colors you want to use in the order of the items you want colored:
+
+```
+<integer-array name="fab_menu_item_colors">
+    <!-- A dark Holo shade of red -->
+    <item>@android:color/holo_red_dark</item>
+    <!-- A Holo shade of purple -->
+    <item>@android:color/holo_purple</item>
+    <!-- A light Holo shade of green -->
+    <item>@android:color/holo_green_light</item>
+</integer-array>
+```
+
+Make sure you also assign [android:orderInCategory](https://developer.android.com/guide/topics/resources/menu-resource.html) to each menu item in your menu.xml in the same 0-based order.
+
+To provide the color array to the menu items use the following attributes: ```miniFabTitleTextColorList``` and ```miniFabBackgroundTintList```. Note - if you've used ```miniFabTitleTextColor``` and ```miniFabBackgroundTint``` they will be overriden by the color arrays.
+
+##### Result
+<img src="http://yavski.github.io/fab-speed-dial/sample-multi-color.gif" width="360">
+
 ##### Position
-In order to change the position of the view, use the standard android APIs to position *FabSpeedDial* within your *ViewGroup* and be sure to assign *fabGravity* a relevant value.
+In order to change the position of the view, use the standard android APIs to position *FabSpeedDial* within your *ViewGroup* and be sure to assign ```fabGravity``` a relevant value.
 
 <img src="http://yavski.github.io/fab-speed-dial/sample-03.png" width="292">
 <img src="http://yavski.github.io/fab-speed-dial/sample-04.png" width="292">
 <img src="http://yavski.github.io/fab-speed-dial/sample-02.png" width="292">
 
 ##### Basic styling
-As a rule of thumb, attributes prepended with *fab*, i.e. *fabDrawable*, refer to the normsal-sized FAB view; attribtues prepended with *miniFab* refer to the mini-sized FAB views in the list.
+As a rule of thumb, attributes prepended with *fab*, i.e. ```fabDrawable```, refer to the normsal-sized FAB view; attribtues prepended with *miniFab* refer to the mini-sized FAB views in the list.
 
 The following attribtues are supported:
 
@@ -137,6 +130,9 @@ The following attribtues are supported:
 | app:fabBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the main FAB |
 | app:miniFabDrawableTint | [android:tint](http://developer.android.com/reference/android/widget/ImageView.html#attr_android:tint) | Tints the icon drawable of the mini FAB(s) |
 | app:miniFabBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the mini FAB(s) |
+|app:miniFabBackgroundTintList | | An array containing the background colors for each of the mini FABs.
+|app:miniFabTitleTextColor| [android:textColor]  (https://developer.android.com/reference/android/widget/TextView.html#attr_android:textColor) | Sets the color of the title of the mini FAB. |
+|app:miniFabTitleTextColorList|| An array containing the colors for each of the titles of the mini FABs.
 | app:miniFabTitleBackgroundTint | [android:backgroundTint](http://developer.android.com/reference/android/view/View.html#attr_android:backgroundTint) | Tints the background colour of the title(s) of the mini FAB(s) |
 | app:miniFabTitlesEnabled | | Convinience for hiding the tilte(s) of the mini FAB(s) |
 | app:touchGuard | | Hide FAB when touching out of its bounds |

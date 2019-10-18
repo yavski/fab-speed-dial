@@ -22,21 +22,21 @@
     <item
         android:id="@+id/action_call"
         android:icon="@drawable/ic_call_white_24px"
-        android:orderInCategory="100"
+        android:orderInCategory="0"
         android:title="@string/menu_item_call"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_text"
         android:icon="@drawable/ic_chat_bubble_outline_white_24px"
-        android:orderInCategory="100"
+        android:orderInCategory="1"
         android:title="@string/menu_item_text"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_email"
         android:icon="@drawable/ic_mail_outline_white_24px"
-        android:orderInCategory="100"
+        android:orderInCategory="2"
         android:title="@string/menu_item_email"
         app:showAsAction="never" />
 

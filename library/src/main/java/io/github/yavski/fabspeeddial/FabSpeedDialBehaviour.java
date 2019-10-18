@@ -16,6 +16,7 @@
 
 package io.github.yavski.fabspeeddial;
 
+import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
@@ -23,6 +24,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
+import android.util.AttributeSet;
 import android.view.View;
 
 import java.lang.reflect.InvocationTargetException;
@@ -32,23 +34,23 @@ import java.util.List;
 
 /**
  * Copyright (C) 2015 The Android Open Source Project
- * <p/>
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p/>
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * A slightly modified version of the original
  * {@link android.support.design.widget.FloatingActionButton.Behavior}.
- * <p/>
+ * <p>
  * Created by yavorivanov on 03/01/2016.
  */
 public class FabSpeedDialBehaviour extends CoordinatorLayout.Behavior<FabSpeedDial> {
@@ -60,6 +62,14 @@ public class FabSpeedDialBehaviour extends CoordinatorLayout.Behavior<FabSpeedDi
     private ViewPropertyAnimatorCompat mFabTranslationYAnimator;
     private float mFabTranslationY;
     private Rect mTmpRect;
+
+    public FabSpeedDialBehaviour() {
+
+    }
+
+    public FabSpeedDialBehaviour(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
     @Override
     public boolean layoutDependsOn(CoordinatorLayout parent, FabSpeedDial child, View dependency) {
