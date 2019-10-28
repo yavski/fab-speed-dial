@@ -8,13 +8,6 @@ Similarly tо [NavigationView] (http://developer.android.com/reference/android/s
 
 ### Gettting started
 
-##### Add the dependency to gradle.build
-```
-dependencies {
-    compile 'io.github.yavski:fab-speed-dial:1.0.6'
-}
-```
-
 ##### Define a menu resource
 ```
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
